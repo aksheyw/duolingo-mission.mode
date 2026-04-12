@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Mockup — Duolingo Mission Mode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+
+.phone{width:390px;height:844px;background:#ECE5DD;border-radius:40px;border:2px solid #444;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.3);transform-origin:center center;display:flex;flex-direction:column}
+.phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1C1C1C;border-radius:20px;z-index:10}
+
+/* Status bar */
+.statusbar{height:44px;background:#EDEDED;display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 6px;font-size:14px;font-weight:600;color:#1C1C1C;flex-shrink:0;padding-top:36px}
+.statusbar .right{font-size:12px;color:#333;display:flex;gap:4px;align-items:center}
+
+/* WhatsApp header */
+.wa-header{height:56px;background:#EDEDED;display:flex;align-items:center;padding:0 12px;gap:10px;border-bottom:1px solid #D4D4D4;flex-shrink:0}
+.wa-back{font-size:20px;color:#00A884;cursor:default}
+.wa-avatar{width:36px;height:36px;border-radius:50%;background:#58CC02;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:#FFF}
+.wa-name{flex:1;font-size:16px;font-weight:600;color:#1C1C1C}
+.wa-dots{font-size:18px;color:#54656F;cursor:default}
+
+/* Chat area */
+.chat{flex:1;background:#ECE5DD;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden}
+
+/* Date chip */
+.date-chip{background:#D1F4CC;padding:4px 12px;border-radius:8px;font-size:12px;color:#54656F;align-self:center}
+
+/* Message bubble */
+.bubble-wrap{align-self:flex-start;max-width:80%}
+.bubble{background:#FFFFFF;border-radius:12px;border-bottom-left-radius:4px;padding:12px 16px;position:relative;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.bubble-text{font-size:15px;color:#303030;line-height:1.5}
+.bubble-time{font-size:11px;color:#667781;text-align:right;margin-top:4px}
+
+/* Action button */
+.wa-action{align-self:flex-start;max-width:80%;width:100%;margin-top:4px}
+.wa-action-btn{width:100%;height:44px;border-radius:24px;background:#00A884;color:#FFF;font-size:15px;font-weight:600;border:none;cursor:default;display:flex;align-items:center;justify-content:center;gap:4px}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <!-- Status bar -->
+  <div class="statusbar">
+    <span>09:41</span>
+    <div class="right">
+      <span>📶</span>
+      <span>📡</span>
+      <span>🔋</span>
+    </div>
+  </div>
+
+  <!-- WhatsApp header -->
+  <div class="wa-header">
+    <span class="wa-back">‹</span>
+    <div class="wa-avatar">🦉</div>
+    <span class="wa-name">Duolingo</span>
+    <span class="wa-dots">⋮</span>
+  </div>
+
+  <!-- Chat area -->
+  <div class="chat">
+    <div class="date-chip">Today, 09:41 AM</div>
+
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <div class="bubble-text">Ravi, your Job Interview mission is 60% complete. 12 days left. Let's keep going.</div>
+        <div class="bubble-time">09:41</div>
+      </div>
+    </div>
+
+    <div class="wa-action">
+      <button class="wa-action-btn">Continue Mission →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function scl(){
+  const s=Math.min(1,(window.innerHeight*0.95)/844);
+  document.getElementById('phone').style.transform='scale('+s+')';
+}
+window.addEventListener('resize',scl);
+scl();
+</script>
+</body>
+</html>
