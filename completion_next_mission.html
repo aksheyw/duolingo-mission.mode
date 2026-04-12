@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Mission</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;font-family:'Nunito','Rounded Mplus 1c',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+.phone{width:390px;height:844px;background:#FFF;border-radius:40px;border:2px solid #444;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.3);display:flex;flex-direction:column}
+.phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1C1C1C;border-radius:20px;z-index:10}
+
+.sbar{height:44px;padding:0 24px;padding-top:36px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700;color:#1C1C1C;flex-shrink:0}
+.sbar .right{font-size:12px;display:flex;gap:6px}
+
+.next-content{flex:1;padding:24px;display:flex;flex-direction:column}
+
+.complete-badge{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid #E5E5E5;margin-bottom:32px}
+.check-circle{width:28px;height:28px;border-radius:50%;background:#58CC02;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.check-circle svg{width:14px;height:14px}
+.complete-text{font-size:16px;font-weight:600;color:#1C1C1C}
+.complete-text span{color:#58CC02;font-weight:700}
+
+.next-title{font-size:24px;font-weight:800;color:#1C1C1C;margin-bottom:20px}
+
+.mission-card{background:#FFB020;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.mission-icon{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mission-info{flex:1}
+.mission-name{font-size:17px;font-weight:700;color:#FFF}
+.mission-dur{font-size:14px;color:rgba(255,255,255,.8)}
+.mission-streak{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;flex-direction:column}
+.mission-streak .fire{font-size:16px}
+.mission-streak .num{font-size:11px;font-weight:800;color:#FFF}
+
+.prog-section{margin-bottom:32px}
+.prog-row{display:flex;justify-content:space-between;font-size:13px;color:#777;margin-bottom:6px}
+.prog-bar2{height:8px;background:#E5E5E5;border-radius:4px;overflow:hidden}
+.prog-fill2{height:100%;width:2%;background:#1C1C1C;border-radius:4px}
+
+.next-btn{width:100%;height:52px;border:none;border-radius:16px;background:#58CC02;border-bottom:4px solid #46A302;color:#FFF;font-family:inherit;font-size:17px;font-weight:700;cursor:default}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="sbar">
+    <span>09:41</span>
+    <div class="right"><span>||||</span><span>WiFi</span><span>Battery</span></div>
+  </div>
+  <div class="next-content">
+    <div class="complete-badge">
+      <div class="check-circle"><svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="#FFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="complete-text">Travel Basics - <span>Complete</span></div>
+    </div>
+    <div class="next-title">Next Mission</div>
+    <div class="mission-card">
+      <div class="mission-icon">💼</div>
+      <div class="mission-info">
+        <div class="mission-name">Confident with Colleagues</div>
+        <div class="mission-dur">21-day mission</div>
+      </div>
+      <div class="mission-streak">
+        <span class="fire">🔥</span>
+        <span class="num">21</span>
+      </div>
+    </div>
+    <div class="prog-section">
+      <div class="prog-row"><span>0%</span><span>Progress</span></div>
+      <div class="prog-bar2"><div class="prog-fill2"></div></div>
+    </div>
+    <button class="next-btn">Start Mission</button>
+  </div>
+</div>
+
+<script>
+function scl(){const s=Math.min(1,(window.innerHeight*0.95)/844);document.getElementById('phone').style.transform='scale('+s+')';}
+window.addEventListener('resize',scl);scl();
+</script>
+</body>
+</html>

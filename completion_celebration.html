@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Completion Celebration</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;font-family:'Nunito','Rounded Mplus 1c',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+.phone{width:390px;height:844px;background:#58CC02;border-radius:40px;border:2px solid #444;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.3);display:flex;flex-direction:column}
+.phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1C1C1C;border-radius:20px;z-index:10}
+
+.sbar{height:44px;padding:0 24px;padding-top:36px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0}
+
+.cele-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;text-align:center;position:relative;overflow:hidden}
+
+.cele-title{font-size:28px;font-weight:800;color:#FFF;margin-bottom:4px}
+.cele-sub{font-size:18px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:24px}
+
+.streak-badge{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin-bottom:32px;position:relative}
+.streak-badge .fire{font-size:32px}
+.streak-badge .num{position:absolute;bottom:-2px;right:-2px;background:#FF9600;color:#FFF;font-size:14px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #58CC02}
+
+.cele-btn{width:calc(100% - 64px);height:52px;border:none;border-radius:16px;background:#FFF;color:#58CC02;font-family:inherit;font-size:17px;font-weight:700;cursor:default;position:absolute;bottom:40px}
+
+/* Confetti */
+.confetti{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
+.cp{position:absolute;border-radius:2px;animation:cfall linear infinite}
+.cs{position:absolute;animation:cfall linear infinite;font-size:20px}
+@keyframes cfall{0%{transform:translateY(-30px) rotate(0deg);opacity:1}80%{opacity:1}100%{transform:translateY(860px) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="sbar">
+    <span style="visibility:hidden">09:41</span>
+    <span style="visibility:hidden">icons</span>
+  </div>
+  <div class="cele-content">
+    <div class="confetti" id="confC"></div>
+    <div class="cele-title">100% Mission Ready</div>
+    <div class="cele-sub">Travel Basics complete</div>
+    <div class="streak-badge">
+      <span class="fire">🔥</span>
+      <span class="num">21</span>
+    </div>
+    <button class="cele-btn">Claim reward</button>
+  </div>
+</div>
+
+<script>
+function scl(){const s=Math.min(1,(window.innerHeight*0.95)/844);document.getElementById('phone').style.transform='scale('+s+')';}
+window.addEventListener('resize',scl);scl();
+
+(function(){
+  const c = document.getElementById('confC');
+  const cols = ['#FFFFFF','#FFD700','#FF6B6B','#87CEEB','#FFA500','#FFFFFF'];
+  const shapes = ['■','●','★','✦','~','○'];
+  for(let i = 0; i < 35; i++){
+    const isShape = Math.random() > 0.5;
+    if(isShape){
+      const s = document.createElement('div');
+      s.className = 'cs';
+      s.textContent = shapes[Math.floor(Math.random()*shapes.length)];
+      s.style.left = Math.random()*100+'%';
+      s.style.color = cols[Math.floor(Math.random()*cols.length)];
+      s.style.animationDuration = (2+Math.random()*2)+'s';
+      s.style.animationDelay = (Math.random()*3)+'s';
+      s.style.fontSize = (14+Math.random()*16)+'px';
+      c.appendChild(s);
+    } else {
+      const p = document.createElement('div');
+      p.className = 'cp';
+      p.style.width = (4+Math.random()*6)+'px';
+      p.style.height = (4+Math.random()*6)+'px';
+      p.style.left = Math.random()*100+'%';
+      p.style.background = cols[Math.floor(Math.random()*cols.length)];
+      p.style.animationDuration = (2+Math.random()*2)+'s';
+      p.style.animationDelay = (Math.random()*3)+'s';
+      c.appendChild(p);
+    }
+  }
+})();
+</script>
+</body>
+</html>
