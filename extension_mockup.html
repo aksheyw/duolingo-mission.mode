@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extension Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;font-family:'Nunito','Rounded Mplus 1c',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+.phone{width:390px;height:844px;background:#FFF;border-radius:40px;border:2px solid #444;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.3);transform-origin:center center;display:flex;flex-direction:column}
+.phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1C1C1C;border-radius:20px;z-index:10}
+
+.sbar{height:44px;padding:0 24px;padding-top:36px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700;color:#1C1C1C;flex-shrink:0}
+.sbar .right{font-size:12px;display:flex;gap:6px;align-items:center}
+
+.content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;text-align:center}
+
+/* Owl */
+.owl-wrap{margin-bottom:24px}
+
+.title{font-size:22px;font-weight:800;color:#1C1C1C;margin-bottom:16px}
+
+/* Progress bar */
+.prog-wrap{width:100%;max-width:280px;margin-bottom:8px}
+.prog-bar{height:12px;background:#E5E5E5;border-radius:6px;overflow:hidden}
+.prog-fill{height:100%;background:#58CC02;border-radius:6px;width:60%}
+.prog-label{font-size:15px;font-weight:700;color:#58CC02;margin-top:6px}
+
+.subtitle{font-size:17px;color:#1C1C1C;line-height:1.5;margin-top:32px;max-width:280px}
+.subtitle em{font-style:normal;font-weight:400}
+
+.btn-area{width:100%;max-width:320px;margin-top:32px}
+.btn-primary{width:100%;height:52px;border:none;border-radius:16px;background:#58CC02;border-bottom:4px solid #46A302;color:#FFF;font-family:inherit;font-size:17px;font-weight:700;cursor:default;margin-bottom:12px}
+.btn-outline{width:100%;height:52px;border:2px solid #E5E5E5;border-radius:16px;background:#FFF;color:#1C1C1C;font-family:inherit;font-size:17px;font-weight:700;cursor:default}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="sbar">
+    <span>09:41</span>
+    <div class="right"><span>||||</span><span>WiFi</span><span>Battery</span></div>
+  </div>
+  <div class="content">
+    <div class="owl-wrap">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <ellipse cx="50" cy="55" rx="35" ry="38" fill="#58CC02"/>
+        <circle cx="37" cy="46" r="11" fill="#FFF"/>
+        <circle cx="63" cy="46" r="11" fill="#FFF"/>
+        <circle cx="39" cy="46" r="5.5" fill="#1C1C1C"/>
+        <circle cx="65" cy="46" r="5.5" fill="#1C1C1C"/>
+        <circle cx="41" cy="44" r="2" fill="#FFF"/>
+        <circle cx="67" cy="44" r="2" fill="#FFF"/>
+        <polygon points="50,56 45,66 55,66" fill="#FF9600"/>
+        <!-- leaves/wings -->
+        <ellipse cx="30" cy="75" rx="8" ry="5" fill="#46A302" transform="rotate(-30 30 75)"/>
+        <ellipse cx="70" cy="75" rx="8" ry="5" fill="#46A302" transform="rotate(30 70 75)"/>
+      </svg>
+    </div>
+    <div class="title">Your mission is still active</div>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill"></div></div>
+      <div class="prog-label">60% complete</div>
+    </div>
+    <div class="subtitle">Life happens — no worries.<br>Want to extend your deadline<br>by 2 weeks?</div>
+    <div class="btn-area">
+      <button class="btn-primary">Yes, extend my mission</button>
+      <button class="btn-outline">End mission</button>
+    </div>
+  </div>
+</div>
+<script>
+function scl(){const s=Math.min(1,(window.innerHeight*0.95)/844);document.getElementById('phone').style.transform='scale('+s+')';}
+window.addEventListener('resize',scl);scl();
+</script>
+</body>
+</html>

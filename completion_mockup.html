@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Completion Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;gap:40px;font-family:'Nunito','Rounded Mplus 1c',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+.phone{width:390px;height:844px;background:#FFF;border-radius:40px;border:2px solid #444;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.3);transform-origin:center center;display:flex;flex-direction:column}
+.phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1C1C1C;border-radius:20px;z-index:10}
+
+.wrap{display:flex;gap:40px;align-items:center;transform-origin:center center}
+
+/* ===== PHONE 1: CELEBRATION ===== */
+.cele{background:#58CC02}
+.cele-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;text-align:center;position:relative;overflow:hidden}
+.cele .sbar{height:44px;padding:0 24px;padding-top:36px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0}
+
+.cele-title{font-size:28px;font-weight:800;color:#FFF;margin-bottom:4px}
+.cele-sub{font-size:18px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:24px}
+
+.streak-badge{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin-bottom:32px;position:relative}
+.streak-badge .fire{font-size:32px}
+.streak-badge .num{position:absolute;bottom:-2px;right:-2px;background:#FF9600;color:#FFF;font-size:14px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #58CC02}
+
+.cele-btn{width:calc(100% - 64px);height:52px;border:none;border-radius:16px;background:#FFF;color:#58CC02;font-family:inherit;font-size:17px;font-weight:700;cursor:default;position:absolute;bottom:40px}
+
+/* Confetti */
+.confetti{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
+.cp{position:absolute;border-radius:2px;animation:cfall linear infinite}
+.cs{position:absolute;animation:cfall linear infinite;font-size:20px}
+@keyframes cfall{0%{transform:translateY(-30px) rotate(0deg);opacity:1}80%{opacity:1}100%{transform:translateY(860px) rotate(720deg);opacity:0}}
+
+/* Squiggles & decorations */
+.squig{position:absolute;pointer-events:none}
+
+/* ===== PHONE 2: NEXT MISSION ===== */
+.next{background:#FFF}
+.next .sbar{height:44px;padding:0 24px;padding-top:36px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700;color:#1C1C1C;flex-shrink:0}
+.next .sbar .right{font-size:12px;display:flex;gap:6px}
+
+.next-content{flex:1;padding:24px;display:flex;flex-direction:column}
+
+.complete-badge{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid #E5E5E5;margin-bottom:32px}
+.check-circle{width:28px;height:28px;border-radius:50%;background:#58CC02;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.check-circle svg{width:14px;height:14px}
+.complete-text{font-size:16px;font-weight:600;color:#1C1C1C}
+.complete-text span{color:#58CC02;font-weight:700}
+
+.next-title{font-size:24px;font-weight:800;color:#1C1C1C;margin-bottom:20px}
+
+.mission-card{background:#FFB020;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.mission-icon{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mission-info{flex:1}
+.mission-name{font-size:17px;font-weight:700;color:#FFF}
+.mission-dur{font-size:14px;color:rgba(255,255,255,.8)}
+.mission-streak{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mission-streak .fire{font-size:16px}
+.mission-streak .num{font-size:11px;font-weight:800;color:#FFF}
+
+.prog-section{margin-bottom:32px}
+.prog-row{display:flex;justify-content:space-between;font-size:13px;color:#777;margin-bottom:6px}
+.prog-bar2{height:8px;background:#E5E5E5;border-radius:4px;overflow:hidden}
+.prog-fill2{height:100%;width:2%;background:#1C1C1C;border-radius:4px}
+
+.next-btn{width:100%;height:52px;border:none;border-radius:16px;background:#58CC02;border-bottom:4px solid #46A302;color:#FFF;font-family:inherit;font-size:17px;font-weight:700;cursor:default}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+
+<!-- PHONE 1: 100% CELEBRATION -->
+<div class="phone cele">
+  <div class="sbar">
+    <span style="visibility:hidden">09:41</span>
+    <span style="visibility:hidden">icons</span>
+  </div>
+  <div class="cele-content">
+    <div class="confetti" id="confC"></div>
+    <div class="cele-title">100% Mission Ready</div>
+    <div class="cele-sub">Travel Basics complete</div>
+    <div class="streak-badge">
+      <span class="fire">🔥</span>
+      <span class="num">21</span>
+    </div>
+    <button class="cele-btn">Claim reward</button>
+  </div>
+</div>
+
+<!-- PHONE 2: NEXT MISSION -->
+<div class="phone next">
+  <div class="sbar">
+    <span>09:41</span>
+    <div class="right"><span>||||</span><span>WiFi</span><span>Battery</span></div>
+  </div>
+  <div class="next-content">
+    <div class="complete-badge">
+      <div class="check-circle"><svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="#FFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="complete-text">Travel Basics - <span>Complete</span></div>
+    </div>
+    <div class="next-title">Next Mission</div>
+    <div class="mission-card">
+      <div class="mission-icon">💼</div>
+      <div class="mission-info">
+        <div class="mission-name">Confident with Colleagues</div>
+        <div class="mission-dur">21-day mission</div>
+      </div>
+      <div class="mission-streak">
+        <span class="fire">🔥</span>
+        <span class="num">21</span>
+      </div>
+    </div>
+    <div class="prog-section">
+      <div class="prog-row"><span>0%</span><span>Progress</span></div>
+      <div class="prog-bar2"><div class="prog-fill2"></div></div>
+    </div>
+    <button class="next-btn">Start Mission</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Scale both phones
+function scl(){
+  const s = Math.min(1, (window.innerHeight * 0.95) / 844, (window.innerWidth * 0.95) / 820);
+  document.getElementById('wrap').style.transform = 'scale(' + s + ')';
+}
+window.addEventListener('resize', scl);
+scl();
+
+// Confetti for celebration phone
+(function(){
+  const c = document.getElementById('confC');
+  const cols = ['#FFFFFF','#FFD700','#FF6B6B','#87CEEB','#FFA500','#FFFFFF'];
+  const shapes = ['■','●','★','✦','~','○'];
+  for(let i = 0; i < 35; i++){
+    const isShape = Math.random() > 0.5;
+    if(isShape){
+      const s = document.createElement('div');
+      s.className = 'cs';
+      s.textContent = shapes[Math.floor(Math.random()*shapes.length)];
+      s.style.left = Math.random()*100+'%';
+      s.style.color = cols[Math.floor(Math.random()*cols.length)];
+      s.style.animationDuration = (2+Math.random()*2)+'s';
+      s.style.animationDelay = (Math.random()*3)+'s';
+      s.style.fontSize = (14+Math.random()*16)+'px';
+      c.appendChild(s);
+    } else {
+      const p = document.createElement('div');
+      p.className = 'cp';
+      p.style.width = (4+Math.random()*6)+'px';
+      p.style.height = (4+Math.random()*6)+'px';
+      p.style.left = Math.random()*100+'%';
+      p.style.background = cols[Math.floor(Math.random()*cols.length)];
+      p.style.animationDuration = (2+Math.random()*2)+'s';
+      p.style.animationDelay = (Math.random()*3)+'s';
+      c.appendChild(p);
+    }
+  }
+})();
+</script>
+</body>
+</html>
