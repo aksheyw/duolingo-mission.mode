@@ -123,27 +123,7 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .fbar.wrong{background:#FF4B4B}
 
 /* MC OPTIONS */
-.mc-opts{display:flex;flex-direction:column;gap:10px;margin-top:12px;flex:1;overflow-y:auto;padding-bottom:4px}
-.mc-opt{background:#FFF;border:2px solid #E5E5E5;border-radius:16px;padding:14px 16px;font-size:15px;font-weight:600;color:#1C1C1C;cursor:pointer;transition:all 150ms ease;line-height:1.4}
-.mc-opt:hover{background:#F7F7F7;border-color:#D0D0D0}
-.mc-opt.sel{border:3px solid #1CB0F6;background:#E8F4FD}
-.mc-opt.correct{border:3px solid #58CC02;background:#F0FAE5;color:#2B8700}
-.mc-opt.wrong{border:3px solid #FF4B4B;background:#FFEDED;color:#FF4B4B;animation:shake 300ms ease}
-.mc-opt.dim{opacity:.5;pointer-events:none}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
-
-/* INTERACTIVE ASSEMBLY */
-.aarea-int{min-height:64px;border:2px dashed #E5E5E5;border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;transition:all 300ms ease;margin-top:12px;position:relative}
-.aarea-int.has-words{border-color:#D0D0D0}
-.aarea-int.correct{background:#F0FAE5;border:2px solid #58CC02;border-style:solid}
-.aarea-int.wrong{background:#FFEDED;border:2px solid #FF4B4B;border-style:solid;animation:shake 300ms ease}
-.asm-placeholder{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:#AFAFAF;pointer-events:none;white-space:nowrap}
-.wbank-int{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;min-height:20px}
-.wc-int{background:#FFF;border:2px solid #E5E5E5;border-bottom:4px solid #E5E5E5;border-radius:12px;padding:6px 14px;font-size:15px;font-weight:600;color:#1C1C1C;cursor:pointer;transition:all 150ms;user-select:none}
-.wc-int:hover{background:#F7F7F7}
-.wc-int:active{transform:translateY(2px);border-bottom-width:2px}
-.wc-int.placed{opacity:.3;pointer-events:none;border-style:dashed}
-.wc-int.in-answer{background:#FFF;border:2px solid #E5E5E5;border-bottom:4px solid #E5E5E5}
 
 /* FILL IN THE BLANK */
 .fb-sent{margin-top:12px;font-size:17px;font-weight:600;color:#1C1C1C;line-height:2.4;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px}
@@ -191,6 +171,17 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .dt-opt{padding:3px 10px;cursor:pointer;color:rgba(255,255,255,.6);font-weight:700;transition:all 150ms}
 .dt-opt.dt-active{background:rgba(255,255,255,.3);color:#FFF;border-radius:10px}
 
+/* CTA SIDE */
+.proto-wrap{display:flex;align-items:center;transform-origin:center center;gap:20px}
+.cta-side{display:flex;flex-direction:column;gap:12px;align-items:stretch;width:110px}
+.cta-btn{height:40px;padding:0 14px;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all 120ms ease;white-space:nowrap}
+.cta-btn:active{transform:scale(.96)}
+.cta-restart{background:rgba(255,255,255,.15);color:rgba(255,255,255,.85)}
+.cta-restart:hover{background:rgba(255,255,255,.25)}
+.cta-skip{background:#FF9600;color:#FFF;display:none}
+.cta-skip:hover{background:#E08600}
+.cta-skip.show{display:block}
+
 /* OVERLAY */
 .overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 300ms ease}
 .overlay.show{opacity:1;pointer-events:auto}
@@ -203,6 +194,7 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 </style>
 </head>
 <body>
+<div class="proto-wrap" id="protoWrap">
 <div class="phone" id="phone">
 <div class="screens">
 
@@ -286,7 +278,7 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
   <div class="slbl">TODAY'S FOCUS</div>
   <div class="fcard" onclick="nav(5)">
     <span class="fico" id="d4fIcon">🎙️</span>
-    <div class="ftxt"><div class="fttl" id="d4fTitle">Speaking Confidence</div><div class="fdsc" id="d4fDesc">Introduce yourself clearly and confidently</div><div class="fmet" id="d4fMet">4 exercises · 10 min</div></div>
+    <div class="ftxt"><div class="fttl" id="d4fTitle">Speaking Confidence</div><div class="fdsc" id="d4fDesc">Introduce yourself clearly and confidently</div><div class="fmet" id="d4fMet">2 exercises · 10 min</div></div>
     <button class="fstart" onclick="event.stopPropagation();nav(5)">START</button>
   </div>
   <div class="slbl">YOUR MISSION PATH</div>
@@ -337,7 +329,7 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
       <svg viewBox="0 0 80 80"><circle class="rbg" cx="40" cy="40" r="36"/><circle class="rfill" id="rf" cx="40" cy="40" r="36"/></svg>
       <div class="rlbl" id="d6pct">4%</div>
     </div>
-    <div class="strow"><span id="d6stat">🎙️ 4 exercises</span><span>⏱️ 10 min</span><span>🔥 1 day streak</span><span class="xp-badge">+40 XP</span></div>
+    <div class="strow"><span id="d6stat">🎙️ 2 exercises</span><span>⏱️ 10 min</span><span>🔥 1 day streak</span><span class="xp-badge">+40 XP</span></div>
     <div class="xp-bonus">+15 XP MISSION BONUS 🎯</div>
   </div>
   <div class="tcard">
@@ -360,6 +352,11 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
   </div>
 </div>
 </div>
+<div class="cta-side">
+  <button class="cta-btn cta-restart" onclick="restart()">&#8634; Restart</button>
+  <button class="cta-btn cta-skip" id="skipBtn" onclick="skipLesson()">Skip &#8594;</button>
+</div>
+</div>
 
 <script>
 // ---- STATE ----
@@ -373,19 +370,19 @@ const MISSIONS = {
     label: 'JOB INTERVIEW MISSION',
     focusIcon: '🎙️', focusTitle: 'Speaking Confidence', focusDesc: 'Introduce yourself clearly and confidently',
     e1: '🔵 Speaking: Tell Me About Yourself', e2: '📝 Vocabulary: Interview Words', e3: '🔒 Listening: Understand the Question',
-    stat: '🎙️ 4 exercises', tIcon: '🤝', tTitle: 'Meetings & Presentations', tDesc: 'Speak confidently in workplace meetings'
+    stat: '🎙️ 2 exercises', tIcon: '🤝', tTitle: 'Meetings & Presentations', tDesc: 'Speak confidently in workplace meetings'
   },
   workplace: {
     label: 'WORKPLACE CONVERSATION MISSION',
     focusIcon: '🎙️', focusTitle: 'Meeting Confidence', focusDesc: 'Join and contribute to workplace discussions',
     e1: '🔵 Speaking: Join a Meeting', e2: '📝 Vocabulary: Meeting Phrases', e3: '🔒 Listening: Follow a Discussion',
-    stat: '🎙️ 4 exercises', tIcon: '📧', tTitle: 'Email & Reports', tDesc: 'Write clear professional communications'
+    stat: '🎙️ 2 exercises', tIcon: '📧', tTitle: 'Email & Reports', tDesc: 'Write clear professional communications'
   },
   corporate: {
     label: 'CORPORATE COMMUNICATION MISSION',
     focusIcon: '✍️', focusTitle: 'Writing Clarity', focusDesc: 'Draft clear professional messages',
     e1: '🔵 Writing: Draft a Status Update', e2: '📝 Vocabulary: Business Email Words', e3: '🔒 Reading: Understand a Memo',
-    stat: '✍️ 4 exercises', tIcon: '🎤', tTitle: 'Client Presentations', tDesc: 'Present ideas confidently to clients'
+    stat: '✍️ 2 exercises', tIcon: '🎤', tTitle: 'Client Presentations', tDesc: 'Present ideas confidently to clients'
   }
 };
 
@@ -393,72 +390,33 @@ const MISSIONS = {
 const LESSONS = {
   interview: [
     {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best answer',
-      prompt:{icon:'💼',label:'Interviewer asks:',q:'"How would you introduce yourself?"'},
-      options:[
-        {text:"I was born in 1995 and grew up in a small town...",correct:false},
-        {text:"I'm a software developer with 5 years of experience in building web applications",correct:true},
-        {text:"I really need this job because my current company is terrible",correct:false},
-        {text:"Your company is so amazing, I've always dreamed of working here",correct:false}
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'💼',label:'Practice saying:',q:''},
+      segments:[
+        {text:'I am a '},
+        {blank:true,options:['software developer','person','worker'],correct:0},
+        {text:' with experience in '},
+        {blank:true,options:['building web applications','doing stuff','many things'],correct:0},
+        {text:'.'}
       ],
-      correctFeedback:"Leading with relevant experience is professional and concise.",
-      wrongFeedback:"Not quite! Try a more professional opening."
-    },
-    {
-      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you answer this interview question?',
-      prompt:{icon:'💼',label:'Interviewer asks:',q:'"Tell me about yourself."'},
-      correctWords:['I','am','currently','working','as','a','manager','where','I','lead','a','team'],
-      distractors:['they','often','very','because'],
-      correctFeedback:"Clear and professional — great answer!",
-      wrongFeedback:"Not quite — check the word order."
+      correctFeedback:"Specific role and skills — strong intro!",
+      wrongFeedback:"Be specific about your role and skills."
     },
     {
       type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
       prompt:{icon:'💼',label:'Practice saying:',q:''},
       segments:[
-        {text:'I have '},
-        {blank:true,options:['5','many','2'],correct:0},
-        {text:' years of experience in '},
-        {blank:true,options:['project management','coding','things'],correct:0},
+        {text:'My biggest '},
+        {blank:true,options:['strength','thing','quality'],correct:0},
+        {text:' is '},
+        {blank:true,options:['problem solving','working hard','being nice'],correct:0},
         {text:'.'}
       ],
-      correctFeedback:"Specific numbers and skills are more convincing!",
-      wrongFeedback:"Not quite — be specific and professional."
-    },
-    {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best answer',
-      prompt:{icon:'💼',label:'Interviewer asks:',q:'"What is your greatest weakness?"'},
-      options:[
-        {text:"I'm a perfectionist who works too hard",correct:false},
-        {text:"I sometimes struggle with delegation, so I've been actively building team trust",correct:true},
-        {text:"I don't really have any weaknesses",correct:false},
-        {text:"I'm always late to meetings",correct:false}
-      ],
-      correctFeedback:"Honest and growth-oriented — exactly what interviewers want.",
-      wrongFeedback:"Not quite! Show self-awareness and growth."
+      correctFeedback:"Clear and professional!",
+      wrongFeedback:"Pick the most professional phrasing."
     }
   ],
   workplace: [
-    {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best response',
-      prompt:{icon:'💬',label:'Team lead asks:',q:'"What\'s the status on your deliverables?"'},
-      options:[
-        {text:"We're on track — the API integration is 80% done and testing starts Thursday",correct:true},
-        {text:"Everything is going fine, no worries",correct:false},
-        {text:"I've been really busy with a lot of different things",correct:false},
-        {text:"I'll send you an email about it later",correct:false}
-      ],
-      correctFeedback:"Specific, proactive, and shows ownership!",
-      wrongFeedback:"Too vague — try being more specific about progress."
-    },
-    {
-      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you respond in this meeting?',
-      prompt:{icon:'💬',label:'Colleague asks:',q:'"Can you walk us through the project?"'},
-      correctWords:['I','would','like','to','walk','you','through','our','progress','on','this','project'],
-      distractors:['them','always','maybe','since'],
-      correctFeedback:"Professional and confident!",
-      wrongFeedback:"Not quite — check the word order."
-    },
     {
       type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
       prompt:{icon:'💬',label:'Practice saying:',q:''},
@@ -469,147 +427,54 @@ const LESSONS = {
         {blank:true,options:['end of day','sometime','whenever'],correct:0},
         {text:' tomorrow.'}
       ],
-      correctFeedback:"Clear and specific — great professional communication!",
-      wrongFeedback:"Not quite — be more specific and direct."
+      correctFeedback:"Clear and specific — great communication!",
+      wrongFeedback:"Be more specific and direct."
     },
     {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best response',
-      prompt:{icon:'💬',label:'In a meeting:',q:'"I think we should skip testing to save time."'},
-      options:[
-        {text:"That's a terrible idea and it won't work",correct:false},
-        {text:"I see your point, but testing could save us time fixing bugs later — what if we do a focused round?",correct:true},
-        {text:"Whatever you think is best, I'll go along with it",correct:false},
-        {text:"The data doesn't support that approach at all",correct:false}
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'💬',label:'Practice saying:',q:''},
+      segments:[
+        {text:'Could we '},
+        {blank:true,options:['schedule','do','have'],correct:0},
+        {text:' a '},
+        {blank:true,options:['meeting','chat','thing'],correct:0},
+        {text:' to discuss this?'}
       ],
-      correctFeedback:"Respectful, constructive, and solution-oriented!",
-      wrongFeedback:"Not quite — aim for respectful and constructive."
+      correctFeedback:"Professional and polite!",
+      wrongFeedback:"Choose the most workplace-appropriate words."
     }
   ],
   corporate: [
-    {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best option',
-      prompt:{icon:'✉️',label:'Writing to your team:',q:'"Send a project update email."'},
-      options:[
-        {text:"Hey team! Just wanted to give you a quick update 👋",correct:false},
-        {text:"I'm writing to provide an update on the Q2 project deliverables",correct:true},
-        {text:"As per my last email which no one responded to...",correct:false},
-        {text:"Hope this email finds you well! I wanted to touch base about the project",correct:false}
-      ],
-      correctFeedback:"Direct, professional, and clearly states the purpose!",
-      wrongFeedback:"Not quite — aim for direct and professional."
-    },
-    {
-      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you write this message?',
-      prompt:{icon:'✉️',label:'Manager asks:',q:'"Send a project update to the team."'},
-      correctWords:['I','am','writing','to','provide','a','brief','update','on','this','project'],
-      distractors:['hereby','regarding','per','therefore'],
-      correctFeedback:"Clear and professional!",
-      wrongFeedback:"Not quite — check the word order."
-    },
     {
       type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
       prompt:{icon:'✉️',label:'Practice writing:',q:''},
       segments:[
         {text:'Please find '},
         {blank:true,options:['attached','enclosed','herewith'],correct:0},
-        {text:' the quarterly report for your '},
+        {text:' the report for your '},
         {blank:true,options:['review','perusal','information'],correct:0},
         {text:'.'}
       ],
       correctFeedback:"Perfect professional email language!",
-      wrongFeedback:"Not quite — use standard business email phrasing."
+      wrongFeedback:"Use standard business email phrasing."
     },
     {
-      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best option',
-      prompt:{icon:'✉️',label:'Email closing:',q:'"End a formal client email."'},
-      options:[
-        {text:"Please don't hesitate to reach out if you have any questions. Best regards, [Name]",correct:true},
-        {text:"Thanks! Talk soon 😊",correct:false},
-        {text:"Sent from my iPhone",correct:false},
-        {text:"I look forward to your earliest response at the soonest possible convenience",correct:false}
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'✉️',label:'Practice writing:',q:''},
+      segments:[
+        {text:'I am writing to '},
+        {blank:true,options:['provide','give','share'],correct:0},
+        {text:' an update on the '},
+        {blank:true,options:['project','work','task'],correct:0},
+        {text:'.'}
       ],
-      correctFeedback:"Professional, warm, and appropriately formal!",
-      wrongFeedback:"Not quite — keep it professional but approachable."
+      correctFeedback:"Clear, direct, and professional!",
+      wrongFeedback:"Pick the most formal option."
     }
   ]
 };
 
 // ---- EXERCISE RENDERERS ----
-function renderMC(ex) {
-  var h = '<div class="mc-opts">';
-  ex.options.forEach(function(opt, i) {
-    h += '<div class="mc-opt" data-idx="' + i + '">' + opt.text + '</div>';
-  });
-  h += '</div>';
-  return h;
-}
-
-function attachMCListeners() {
-  var opts = document.querySelectorAll('.mc-opt');
-  opts.forEach(function(opt) {
-    opt.addEventListener('click', function() {
-      if (exPhase !== 'answering') return;
-      opts.forEach(function(o) { o.classList.remove('sel'); });
-      this.classList.add('sel');
-      document.getElementById('chkbtn').classList.remove('off');
-    });
-  });
-}
-
-function shuffleArray(arr) {
-  var a = arr.slice();
-  for (var i = a.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-  }
-  return a;
-}
-
-function renderAssembly(ex) {
-  var allWords = ex.correctWords.concat(ex.distractors);
-  var shuffled = shuffleArray(allWords);
-  var h = '<div class="aarea-int" id="asmAnswer"><span class="asm-placeholder">Tap words to build your answer</span></div>';
-  h += '<div class="wbank-int" id="asmBank">';
-  shuffled.forEach(function(w, i) {
-    h += '<span class="wc-int" data-bidx="' + i + '" data-word="' + w + '">' + w + '</span>';
-  });
-  h += '</div>';
-  return h;
-}
-
-function attachAssemblyListeners() {
-  var bank = document.getElementById('asmBank');
-  var answer = document.getElementById('asmAnswer');
-  bank.addEventListener('click', function(e) {
-    var wc = e.target.closest('.wc-int');
-    if (!wc || wc.classList.contains('placed') || exPhase !== 'answering') return;
-    wc.classList.add('placed');
-    var clone = document.createElement('span');
-    clone.className = 'wc-int in-answer';
-    clone.textContent = wc.dataset.word;
-    clone.dataset.bankRef = wc.dataset.bidx;
-    answer.appendChild(clone);
-    var ph = answer.querySelector('.asm-placeholder');
-    if (ph) ph.style.display = 'none';
-    answer.classList.add('has-words');
-    document.getElementById('chkbtn').classList.remove('off');
-  });
-  answer.addEventListener('click', function(e) {
-    var wc = e.target.closest('.wc-int');
-    if (!wc || exPhase !== 'answering') return;
-    var bankRef = wc.dataset.bankRef;
-    var bankWord = bank.querySelector('[data-bidx="' + bankRef + '"]');
-    if (bankWord) bankWord.classList.remove('placed');
-    wc.remove();
-    if (!answer.querySelector('.wc-int')) {
-      answer.classList.remove('has-words');
-      var ph = answer.querySelector('.asm-placeholder');
-      if (ph) ph.style.display = '';
-      document.getElementById('chkbtn').classList.add('off');
-    }
-  });
-}
-
 function renderFillBlank(ex) {
   var h = '<div class="fb-sent">';
   var slotCount = 0;
@@ -677,7 +542,8 @@ function renderExercise(index) {
   fillSlots = {};
   activeSlot = null;
 
-  var pct = (index / 4) * 100;
+  var lessonLen = lesson.length;
+  var pct = (index / lessonLen) * 100;
   document.getElementById('exPfill').style.width = pct + '%';
 
   var container = document.getElementById('exContainer');
@@ -687,11 +553,7 @@ function renderExercise(index) {
   if (ex.prompt && ex.prompt.q) {
     h += '<div class="icard"><div class="icl">' + ex.prompt.icon + ' <em>' + ex.prompt.label + '</em></div><div class="icq">' + ex.prompt.q + '</div></div>';
   }
-  switch (ex.type) {
-    case 'mc': h += renderMC(ex); break;
-    case 'assembly': h += renderAssembly(ex); break;
-    case 'fillblank': h += renderFillBlank(ex); break;
-  }
+  h += renderFillBlank(ex);
   container.innerHTML = h;
 
   var btn = document.getElementById('chkbtn');
@@ -703,11 +565,7 @@ function renderExercise(index) {
   document.getElementById('fb').classList.remove('show');
   document.getElementById('fb').className = 'fbar';
 
-  switch (ex.type) {
-    case 'mc': attachMCListeners(); break;
-    case 'assembly': attachAssemblyListeners(); break;
-    case 'fillblank': attachFillBlankListeners(ex); break;
-  }
+  attachFillBlankListeners(ex);
 }
 
 function startLesson() {
@@ -719,23 +577,6 @@ function startLesson() {
 }
 
 // ---- VALIDATION ----
-function validateMC(ex) {
-  var selected = document.querySelector('.mc-opt.sel');
-  if (!selected) return false;
-  return ex.options[parseInt(selected.dataset.idx)].correct;
-}
-
-function validateAssembly(ex) {
-  var answer = document.getElementById('asmAnswer');
-  var placed = [];
-  answer.querySelectorAll('.wc-int').forEach(function(c) { placed.push(c.textContent); });
-  if (placed.length !== ex.correctWords.length) return false;
-  for (var i = 0; i < placed.length; i++) {
-    if (placed[i] !== ex.correctWords[i]) return false;
-  }
-  return true;
-}
-
 function validateFillBlank(ex) {
   for (var i = 0; i < ex.segments.length; i++) {
     if (ex.segments[i].blank) {
@@ -747,52 +588,23 @@ function validateFillBlank(ex) {
 
 // ---- FEEDBACK ----
 function markCorrectState(ex) {
-  switch (ex.type) {
-    case 'mc':
-      document.querySelectorAll('.mc-opt').forEach(function(opt) {
-        if (ex.options[parseInt(opt.dataset.idx)].correct) opt.classList.add('correct');
-        else opt.classList.add('dim');
-      });
-      break;
-    case 'assembly':
-      document.getElementById('asmAnswer').classList.add('correct');
-      break;
-    case 'fillblank':
-      document.querySelectorAll('.fb-slot').forEach(function(s) { s.classList.add('correct'); });
-      break;
-  }
+  document.querySelectorAll('.fb-slot').forEach(function(s) { s.classList.add('correct'); });
 }
 
 function resetExerciseSelection(ex) {
-  switch (ex.type) {
-    case 'mc':
-      var wrongOpt = document.querySelector('.mc-opt.sel');
-      if (wrongOpt) {
-        wrongOpt.classList.add('wrong');
-        setTimeout(function() { wrongOpt.classList.remove('sel','wrong'); }, 600);
+  ex.segments.forEach(function(seg, i) {
+    if (seg.blank && fillSlots[i] !== seg.correct) {
+      var slot = document.querySelector('.fb-slot[data-slot="' + i + '"]');
+      if (slot) {
+        slot.classList.add('wrong');
+        setTimeout(function() {
+          slot.classList.remove('wrong','filled');
+          slot.textContent = '___';
+          delete fillSlots[i];
+        }, 600);
       }
-      break;
-    case 'assembly':
-      var asm = document.getElementById('asmAnswer');
-      asm.classList.add('wrong');
-      setTimeout(function() { asm.classList.remove('wrong'); }, 600);
-      break;
-    case 'fillblank':
-      ex.segments.forEach(function(seg, i) {
-        if (seg.blank && fillSlots[i] !== seg.correct) {
-          var slot = document.querySelector('.fb-slot[data-slot="' + i + '"]');
-          if (slot) {
-            slot.classList.add('wrong');
-            setTimeout(function() {
-              slot.classList.remove('wrong','filled');
-              slot.textContent = '___';
-              delete fillSlots[i];
-            }, 600);
-          }
-        }
-      });
-      break;
-  }
+    }
+  });
 }
 
 function showFeedback(correct, ex) {
@@ -828,16 +640,11 @@ function handleCheck() {
   var ex = lesson[exIndex];
 
   if (exPhase === 'answering') {
-    var isCorrect = false;
-    switch (ex.type) {
-      case 'mc': isCorrect = validateMC(ex); break;
-      case 'assembly': isCorrect = validateAssembly(ex); break;
-      case 'fillblank': isCorrect = validateFillBlank(ex); break;
-    }
-    showFeedback(isCorrect, ex);
+    showFeedback(validateFillBlank(ex), ex);
   } else if (exPhase === 'continue') {
     document.getElementById('fb').classList.remove('show');
-    if (exIndex < 3) {
+    var lessonLen = (LESSONS[s2sel] || LESSONS.interview).length;
+    if (exIndex < lessonLen - 1) {
       exIndex++;
       renderExercise(exIndex);
     } else {
@@ -858,6 +665,16 @@ function exitExercise() {
   fillSlots = {};
   activeSlot = null;
   nav(4);
+}
+
+function skipLesson() {
+  exIndex = 0;
+  exPhase = 'answering';
+  fillSlots = {};
+  activeSlot = null;
+  document.getElementById('fb').classList.remove('show');
+  document.getElementById('fb').className = 'fbar';
+  nav(6);
 }
 
 // ---- DASHBOARD UPDATE ----
@@ -950,6 +767,8 @@ function nav(to) {
 
   cur = to;
 
+  document.getElementById('skipBtn').classList.toggle('show', to === 5);
+
   if (to >= 4) updScreens();
   if (to === 5) startLesson();
   if (to === 6) {
@@ -1034,6 +853,7 @@ function restart() {
   document.getElementById('fb').classList.remove('show');
   document.getElementById('fb').className = 'fbar';
   document.getElementById('rf').style.strokeDashoffset = '226.2';
+  document.getElementById('skipBtn').classList.remove('show');
   document.getElementById('s1').classList.add('on');
   busy = false;
 }
@@ -1044,7 +864,7 @@ document.getElementById('ov').addEventListener('click', restart);
 // ---- SCALE ----
 function scl() {
   var s = Math.min(1, (window.innerHeight * 0.95) / 844);
-  document.getElementById('phone').style.transform = 'scale(' + s + ')';
+  document.getElementById('protoWrap').style.transform = 'scale(' + s + ')';
 }
 window.addEventListener('resize', scl);
 
