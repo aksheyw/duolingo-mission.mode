@@ -118,9 +118,12 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .icard{margin:12px 0;background:#F7F7F7;border-radius:16px;padding:18px 20px}
 .icard .icl{font-size:14px;font-style:italic;color:#777}
 .icard .icq{font-size:18px;font-weight:700;color:#1C1C1C;margin-top:6px}
-.fbar{position:absolute;bottom:0;left:0;right:0;background:#58CC02;color:#FFF;font-size:17px;font-weight:700;padding:20px 24px;transform:translateY(100%);transition:transform 300ms ease-out;z-index:50}
-.fbar.show{transform:translateY(0);cursor:pointer}
+.fbar{background:#58CC02;color:#FFF;padding:16px 24px 28px;flex-shrink:0;display:none}
+.fbar.show{display:block}
 .fbar.wrong{background:#FF4B4B}
+.fb-msg{font-size:15px;font-weight:700;margin-bottom:12px}
+.fb-cont{width:100%;height:48px;border:none;border-radius:16px;background:#FFF;color:#58CC02;font-family:inherit;font-size:17px;font-weight:800;cursor:pointer;letter-spacing:.5px}
+.fbar.wrong .fb-cont{display:none}
 
 /* MC OPTIONS */
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
@@ -305,8 +308,8 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
     <div class="xbtn">✕</div>
   </div>
   <div class="cnt" style="padding-top:4px" id="exContainer"></div>
-  <div class="barea" style="position:relative"><button class="btn off" id="chkbtn" onclick="handleCheck()">CHECK</button></div>
-  <div class="fbar" id="fb" onclick="fbClick()"></div>
+  <div class="barea" id="exBarea"><button class="btn off" id="chkbtn" onclick="handleCheck()">CHECK</button></div>
+  <div class="fbar" id="fb"></div>
 </div>
 
 <!-- S6 CELEBRATION -->
@@ -561,7 +564,7 @@ function renderExercise(index) {
   btn.classList.add('off');
   btn.style.background = '';
   btn.style.borderBottomColor = '';
-  btn.parentElement.style.visibility = 'visible';
+  document.getElementById('exBarea').style.display = '';
 
   document.getElementById('fb').classList.remove('show');
   document.getElementById('fb').className = 'fbar';
@@ -612,16 +615,14 @@ function showFeedback(correct, ex) {
   var fb = document.getElementById('fb');
   var btn = document.getElementById('chkbtn');
   if (correct) {
-    fb.className = 'fbar';
-    fb.innerHTML = '✓ ' + ex.correctFeedback + '<span style="float:right;opacity:.8">TAP TO CONTINUE →</span>';
-    fb.classList.add('show');
+    fb.className = 'fbar show';
+    fb.innerHTML = '<div class="fb-msg">✓ ' + ex.correctFeedback + '</div><button class="fb-cont" onclick="handleCheck()">CONTINUE</button>';
     exPhase = 'continue';
-    btn.parentElement.style.visibility = 'hidden';
+    document.getElementById('exBarea').style.display = 'none';
     markCorrectState(ex);
   } else {
-    fb.className = 'fbar wrong';
-    fb.textContent = '✗ ' + ex.wrongFeedback;
-    fb.classList.add('show');
+    fb.className = 'fbar wrong show';
+    fb.innerHTML = '<div class="fb-msg">✗ ' + ex.wrongFeedback + '</div>';
     exPhase = 'answering';
     btn.classList.add('off');
     resetExerciseSelection(ex);
@@ -632,8 +633,10 @@ function showFeedback(correct, ex) {
 // ---- CHECK / CONTINUE HANDLER ----
 function handleCheck() {
   if (busy) return;
-  var btn = document.getElementById('chkbtn');
-  if (btn.classList.contains('off')) return;
+  if (exPhase === 'answering') {
+    var btn = document.getElementById('chkbtn');
+    if (btn.classList.contains('off')) return;
+  }
   var lesson = LESSONS[s2sel] || LESSONS.interview;
   var ex = lesson[exIndex];
 
@@ -651,10 +654,6 @@ function handleCheck() {
       setTimeout(function() { busy = false; nav(6); }, 400);
     }
   }
-}
-
-function fbClick() {
-  if (exPhase === 'continue') handleCheck();
 }
 
 function exitExercise() {
@@ -850,6 +849,7 @@ function restart() {
   });
   document.getElementById('fb').classList.remove('show');
   document.getElementById('fb').className = 'fbar';
+  document.getElementById('exBarea').style.display = '';
   document.getElementById('rf').style.strokeDashoffset = '226.2';
   document.getElementById('skipBtn').classList.remove('show');
   document.getElementById('s1').classList.add('on');
