@@ -410,9 +410,9 @@ const LESSONS = {
       prompt:{icon:'💼',label:'Practice saying:',q:''},
       segments:[
         {text:'My biggest '},
-        {blank:true,options:['strength','thing','quality'],correct:0},
+        {blank:true,options:['thing','strength','quality'],correct:1},
         {text:' is '},
-        {blank:true,options:['problem solving','working hard','being nice'],correct:0},
+        {blank:true,options:['working hard','problem solving','being nice'],correct:1},
         {text:'.'}
       ],
       correctFeedback:"Clear and professional!",
@@ -425,9 +425,9 @@ const LESSONS = {
       prompt:{icon:'💬',label:'Practice saying:',q:''},
       segments:[
         {text:"I'll "},
-        {blank:true,options:['send','give','do'],correct:0},
+        {blank:true,options:['give','do','send'],correct:2},
         {text:' the report by '},
-        {blank:true,options:['end of day','sometime','whenever'],correct:0},
+        {blank:true,options:['sometime','end of day','whenever'],correct:1},
         {text:' tomorrow.'}
       ],
       correctFeedback:"Clear and specific — great communication!",
@@ -438,9 +438,9 @@ const LESSONS = {
       prompt:{icon:'💬',label:'Practice saying:',q:''},
       segments:[
         {text:'Could we '},
-        {blank:true,options:['schedule','do','have'],correct:0},
+        {blank:true,options:['do','have','schedule'],correct:2},
         {text:' a '},
-        {blank:true,options:['meeting','chat','thing'],correct:0},
+        {blank:true,options:['chat','meeting','thing'],correct:1},
         {text:' to discuss this?'}
       ],
       correctFeedback:"Professional and polite!",
@@ -453,9 +453,9 @@ const LESSONS = {
       prompt:{icon:'✉️',label:'Practice writing:',q:''},
       segments:[
         {text:'Please find '},
-        {blank:true,options:['attached','enclosed','herewith'],correct:0},
+        {blank:true,options:['put','attached','stuck'],correct:1},
         {text:' the report for your '},
-        {blank:true,options:['review','perusal','information'],correct:0},
+        {blank:true,options:['look','glance','review'],correct:2},
         {text:'.'}
       ],
       correctFeedback:"Perfect professional email language!",
@@ -466,9 +466,9 @@ const LESSONS = {
       prompt:{icon:'✉️',label:'Practice writing:',q:''},
       segments:[
         {text:'I am writing to '},
-        {blank:true,options:['provide','give','share'],correct:0},
+        {blank:true,options:['dump','throw','provide'],correct:2},
         {text:' an update on the '},
-        {blank:true,options:['project','work','task'],correct:0},
+        {blank:true,options:['stuff','project deliverables','things'],correct:1},
         {text:'.'}
       ],
       correctFeedback:"Clear, direct, and professional!",
@@ -661,6 +661,9 @@ function exitExercise() {
   exPhase = 'answering';
   fillSlots = {};
   activeSlot = null;
+  document.getElementById('fb').classList.remove('show');
+  document.getElementById('fb').className = 'fbar';
+  document.getElementById('exBarea').style.display = '';
   nav(4);
 }
 
@@ -671,6 +674,7 @@ function skipLesson() {
   activeSlot = null;
   document.getElementById('fb').classList.remove('show');
   document.getElementById('fb').className = 'fbar';
+  document.getElementById('exBarea').style.display = '';
   nav(6);
 }
 
