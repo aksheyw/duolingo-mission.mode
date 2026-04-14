@@ -89,7 +89,7 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .mhd{font-size:36px;font-weight:800;margin-top:2px}
 .mhs{font-size:13px;opacity:.7}
 .mhp{margin-top:10px;height:6px;background:rgba(255,255,255,.3);border-radius:3px;overflow:hidden}
-.mhpf{height:100%;width:4%;background:#FFF;border-radius:3px}
+.mhpf{height:100%;width:4%;background:#FFF;border-radius:3px;transition:width 400ms ease}
 .mhpc{font-size:15px;opacity:1;font-weight:700;margin-top:6px;letter-spacing:.5px}
 .mhmot{font-size:12px;opacity:.7;margin-top:2px}
 .slbl{font-size:11px;font-weight:700;color:#777;text-transform:uppercase;letter-spacing:1px;padding:12px 16px 6px;flex-shrink:0}
@@ -113,17 +113,51 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .ehdr{padding:48px 20px 8px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .ehdr .pbar{height:6px}
 .strk{font-size:14px;color:#FF9600;font-weight:700;white-space:nowrap;flex-shrink:0}
-.etlbl{font-size:12px;font-weight:700;color:#58CC02;text-transform:uppercase;letter-spacing:1px;padding:0 24px}
-.ettl{font-size:20px;font-weight:800;color:#1C1C1C;padding:6px 24px 0}
-.icard{margin:12px 24px;background:#F7F7F7;border-radius:16px;padding:18px 20px}
+.etlbl{font-size:12px;font-weight:700;color:#58CC02;text-transform:uppercase;letter-spacing:1px;padding:0 0}
+.ettl{font-size:20px;font-weight:800;color:#1C1C1C;padding:6px 0 0}
+.icard{margin:12px 0;background:#F7F7F7;border-radius:16px;padding:18px 20px}
 .icard .icl{font-size:14px;font-style:italic;color:#777}
 .icard .icq{font-size:18px;font-weight:700;color:#1C1C1C;margin-top:6px}
-.aarea{margin:0 24px;min-height:56px;border:2px dashed #E5E5E5;border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;transition:all 300ms ease}
-.aarea .wc{background:#F0FAE5;border:2px solid #58CC02;border-radius:20px;padding:6px 12px;font-size:15px;color:#1C1C1C}
-.wbank{margin:10px 24px 0;display:flex;flex-wrap:wrap;gap:6px;min-height:20px}
-.wbank .wc{background:#F7F7F7;border:1px solid #E5E5E5;border-radius:20px;padding:6px 12px;font-size:15px;color:#1C1C1C;cursor:pointer;opacity:.3}
-.fbar{position:absolute;bottom:0;left:0;right:0;background:#58CC02;color:#FFF;font-size:17px;font-weight:700;padding:20px 24px;transform:translateY(100%);transition:transform 300ms ease-out;z-index:50;cursor:pointer}
-.fbar.show{transform:translateY(0)}
+.fbar{position:absolute;bottom:0;left:0;right:0;background:#58CC02;color:#FFF;font-size:17px;font-weight:700;padding:20px 24px;transform:translateY(100%);transition:transform 300ms ease-out;z-index:50}
+.fbar.show{transform:translateY(0);cursor:pointer}
+.fbar.wrong{background:#FF4B4B}
+
+/* MC OPTIONS */
+.mc-opts{display:flex;flex-direction:column;gap:10px;margin-top:12px;flex:1;overflow-y:auto;padding-bottom:4px}
+.mc-opt{background:#FFF;border:2px solid #E5E5E5;border-radius:16px;padding:14px 16px;font-size:15px;font-weight:600;color:#1C1C1C;cursor:pointer;transition:all 150ms ease;line-height:1.4}
+.mc-opt:hover{background:#F7F7F7;border-color:#D0D0D0}
+.mc-opt.sel{border:3px solid #1CB0F6;background:#E8F4FD}
+.mc-opt.correct{border:3px solid #58CC02;background:#F0FAE5;color:#2B8700}
+.mc-opt.wrong{border:3px solid #FF4B4B;background:#FFEDED;color:#FF4B4B;animation:shake 300ms ease}
+.mc-opt.dim{opacity:.5;pointer-events:none}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+
+/* INTERACTIVE ASSEMBLY */
+.aarea-int{min-height:64px;border:2px dashed #E5E5E5;border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;transition:all 300ms ease;margin-top:12px;position:relative}
+.aarea-int.has-words{border-color:#D0D0D0}
+.aarea-int.correct{background:#F0FAE5;border:2px solid #58CC02;border-style:solid}
+.aarea-int.wrong{background:#FFEDED;border:2px solid #FF4B4B;border-style:solid;animation:shake 300ms ease}
+.asm-placeholder{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:#AFAFAF;pointer-events:none;white-space:nowrap}
+.wbank-int{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;min-height:20px}
+.wc-int{background:#FFF;border:2px solid #E5E5E5;border-bottom:4px solid #E5E5E5;border-radius:12px;padding:6px 14px;font-size:15px;font-weight:600;color:#1C1C1C;cursor:pointer;transition:all 150ms;user-select:none}
+.wc-int:hover{background:#F7F7F7}
+.wc-int:active{transform:translateY(2px);border-bottom-width:2px}
+.wc-int.placed{opacity:.3;pointer-events:none;border-style:dashed}
+.wc-int.in-answer{background:#FFF;border:2px solid #E5E5E5;border-bottom:4px solid #E5E5E5}
+
+/* FILL IN THE BLANK */
+.fb-sent{margin-top:12px;font-size:17px;font-weight:600;color:#1C1C1C;line-height:2.4;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px}
+.fb-word{display:inline}
+.fb-slot{display:inline-flex;min-width:80px;height:32px;border-bottom:3px solid #E5E5E5;margin:0 2px;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#1CB0F6;cursor:pointer;transition:all 200ms;padding:0 8px;border-radius:4px 4px 0 0}
+.fb-slot:hover{background:#F7F7F7}
+.fb-slot.active{border-bottom-color:#1CB0F6;background:#E8F4FD}
+.fb-slot.filled{border-bottom-color:#1CB0F6;color:#1CB0F6}
+.fb-slot.correct{border-bottom-color:#58CC02;background:#F0FAE5;color:#2B8700}
+.fb-slot.wrong{border-bottom-color:#FF4B4B;background:#FFEDED;color:#FF4B4B;animation:shake 300ms ease}
+.fb-choices{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;justify-content:center}
+.fb-choice{background:#FFF;border:2px solid #E5E5E5;border-bottom:4px solid #E5E5E5;border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#1C1C1C;cursor:pointer;transition:all 150ms}
+.fb-choice:hover{background:#F7F7F7}
+.fb-choice.sel{background:#E8F4FD;border-color:#1CB0F6;color:#1CB0F6}
 
 /* S6 CELEBRATION */
 .s6{background:#F7F7F7;position:relative;display:flex;flex-direction:column;align-items:center;padding-top:60px;overflow:hidden}
@@ -139,7 +173,9 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .rfill{fill:none;stroke:#58CC02;stroke-width:6;stroke-linecap:round;stroke-dasharray:226.2;stroke-dashoffset:226.2;transition:stroke-dashoffset 800ms ease-out}
 .rfill.anim{stroke-dashoffset:217.15}
 .rlbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;font-weight:800;color:#58CC02}
-.strow{display:flex;justify-content:center;gap:20px;margin-top:8px;font-size:12px;color:#777}
+.strow{display:flex;justify-content:center;gap:16px;margin-top:8px;font-size:12px;color:#777;flex-wrap:wrap;align-items:center}
+.xp-badge{background:#FFD900;color:#1C1C1C;font-weight:800;padding:2px 8px;border-radius:8px;font-size:12px}
+.xp-bonus{font-size:11px;color:#FF9600;font-weight:700;margin-top:6px;text-align:center;position:relative;z-index:2}
 .tcard{margin-top:14px;background:#FFF;border:2px dashed #E5E5E5;border-radius:16px;padding:14px 16px;max-width:320px;width:100%;text-align:left;position:relative;z-index:2}
 .tclbl{font-size:10px;font-weight:700;color:#AFAFAF;text-transform:uppercase;letter-spacing:1px}
 .tccnt{display:flex;align-items:center;gap:10px;margin-top:6px}
@@ -149,6 +185,11 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 .tcdsc{font-size:12px;color:#777;margin-top:1px}
 .lpill{background:#F0F0F0;color:#AFAFAF;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0}
 .s6 .barea{width:100%;max-width:320px;z-index:2;padding:14px 0 32px}
+
+/* DAY TOGGLE */
+.day-toggle{display:flex;gap:0;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden;width:fit-content;margin-top:8px;font-size:10px}
+.dt-opt{padding:3px 10px;cursor:pointer;color:rgba(255,255,255,.6);font-weight:700;transition:all 150ms}
+.dt-opt.dt-active{background:rgba(255,255,255,.3);color:#FFF;border-radius:10px}
 
 /* OVERLAY */
 .overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 300ms ease}
@@ -234,20 +275,24 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
     <div class="mhl" id="d4label">JOB INTERVIEW MISSION</div>
     <div class="mhd" id="d4days">21 DAYS</div>
     <div class="mhs">Until your mission deadline</div>
-    <div class="mhp"><div class="mhpf"></div></div>
-    <div class="mhpc">4% mission-ready</div>
-    <div class="mhmot">You're on track for your deadline</div>
+    <div class="mhp"><div class="mhpf" id="d4pf"></div></div>
+    <div class="mhpc" id="d4pc">4% mission-ready</div>
+    <div class="mhmot" id="d4mot">You're on track for your deadline</div>
+    <div class="day-toggle" id="dayToggle">
+      <span class="dt-opt dt-active" data-day="1" onclick="toggleDay(1)">Day 1</span>
+      <span class="dt-opt" data-day="7" onclick="toggleDay(7)">Day 7</span>
+    </div>
   </div>
   <div class="slbl">TODAY'S FOCUS</div>
   <div class="fcard" onclick="nav(5)">
     <span class="fico" id="d4fIcon">🎙️</span>
-    <div class="ftxt"><div class="fttl" id="d4fTitle">Speaking Confidence</div><div class="fdsc" id="d4fDesc">Introduce yourself clearly and confidently</div><div class="fmet">3 exercises · 12 min</div></div>
+    <div class="ftxt"><div class="fttl" id="d4fTitle">Speaking Confidence</div><div class="fdsc" id="d4fDesc">Introduce yourself clearly and confidently</div><div class="fmet" id="d4fMet">4 exercises · 10 min</div></div>
     <button class="fstart" onclick="event.stopPropagation();nav(5)">START</button>
   </div>
   <div class="slbl">YOUR MISSION PATH</div>
   <div class="equeue" id="d4queue">
-    <div class="erow"><div class="edot" style="background:#1CB0F6"></div><span style="color:#1C1C1C;font-weight:600" id="d4e1">🔵 Speaking: Tell Me About Yourself</span></div>
-    <div class="erow"><div class="edot" style="background:#AFAFAF"></div><span style="color:#777" id="d4e2">📝 Vocabulary: Interview Words</span></div>
+    <div class="erow"><div class="edot" id="d4dot1" style="background:#1CB0F6"></div><span style="color:#1C1C1C;font-weight:600" id="d4e1">🔵 Speaking: Tell Me About Yourself</span></div>
+    <div class="erow"><div class="edot" id="d4dot2" style="background:#AFAFAF"></div><span style="color:#777" id="d4e2">📝 Vocabulary: Interview Words</span></div>
     <div class="erow" style="border-bottom:none"><div class="edot" style="background:#E5E5E5"></div><span style="color:#CCC" id="d4e3">🔒 Listening: Understand the Question</span></div>
   </div>
   <div class="bnav">
@@ -262,24 +307,14 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 <!-- S5 EXERCISE -->
 <div class="scr" id="s5">
   <div class="ehdr">
-    <button class="back" onclick="nav(4)">‹</button>
-    <div class="pbar"><div class="pfill" style="width:50%"></div></div>
+    <button class="back" onclick="exitExercise()">‹</button>
+    <div class="pbar"><div class="pfill" id="exPfill" style="width:0%"></div></div>
     <span class="strk">🔥 7</span>
     <div class="xbtn">✕</div>
   </div>
-  <div class="cnt" style="padding-top:4px">
-    <div class="etlbl">SENTENCE ASSEMBLY</div>
-    <div class="ettl" id="d5title">How would you answer this interview question?</div>
-    <div class="icard"><div class="icl" id="d5prompt">💼 <em>Interviewer asks:</em></div><div class="icq" id="d5question">"Tell me about yourself."</div></div>
-    <div class="aarea" id="aa">
-      <span class="wc">I</span><span class="wc">am</span><span class="wc">currently</span><span class="wc">working</span><span class="wc">as</span><span class="wc">a</span><span class="wc">manager</span><span class="wc">where</span><span class="wc">I</span><span class="wc">lead</span><span class="wc">a</span><span class="wc">team</span>
-    </div>
-    <div class="wbank">
-      <span class="wc">I</span><span class="wc">am</span><span class="wc">currently</span><span class="wc">working</span><span class="wc">as</span><span class="wc">a</span><span class="wc">manager</span><span class="wc">where</span><span class="wc">I</span><span class="wc">lead</span><span class="wc">a</span><span class="wc">team</span>
-    </div>
-  </div>
-  <div class="barea" style="position:relative"><button class="btn" id="chkbtn" onclick="doCheck()">CHECK</button></div>
-  <div class="fbar" id="fb" onclick="nav(6)">✓ Correct! Great sentence.</div>
+  <div class="cnt" style="padding-top:4px" id="exContainer"></div>
+  <div class="barea" style="position:relative"><button class="btn off" id="chkbtn" onclick="handleCheck()">CHECK</button></div>
+  <div class="fbar" id="fb" onclick="fbClick()"></div>
 </div>
 
 <!-- S6 CELEBRATION -->
@@ -296,13 +331,14 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
         <polygon points="32,38 28,46 36,46" fill="#FF9600"/>
       </svg>
     </div>
-    <div class="celtl">Day 1 Complete!</div>
-    <div class="celsb">You're 4% mission-ready.</div>
+    <div class="celtl" id="d6title">Day 1 Complete!</div>
+    <div class="celsb" id="d6sub">You're 4% mission-ready.</div>
     <div class="ringw">
       <svg viewBox="0 0 80 80"><circle class="rbg" cx="40" cy="40" r="36"/><circle class="rfill" id="rf" cx="40" cy="40" r="36"/></svg>
-      <div class="rlbl">4%</div>
+      <div class="rlbl" id="d6pct">4%</div>
     </div>
-    <div class="strow"><span id="d6stat">🎙️ 3 speaking</span><span>⏱️ 12 min</span><span>🔥 1 day streak</span></div>
+    <div class="strow"><span id="d6stat">🎙️ 4 exercises</span><span>⏱️ 10 min</span><span>🔥 1 day streak</span><span class="xp-badge">+40 XP</span></div>
+    <div class="xp-bonus">+15 XP MISSION BONUS 🎯</div>
   </div>
   <div class="tcard">
     <div class="tclbl">UP NEXT AFTER YOUR MISSION</div>
@@ -326,42 +362,507 @@ body{background:#2D2D2D;display:flex;align-items:center;justify-content:center;f
 </div>
 
 <script>
-let cur = 1, s2sel = null, done = false, busy = false, ftm = null, days = 21;
+// ---- STATE ----
+let cur = 1, s2sel = null, done = false, busy = false, days = 21, dashDay = 1;
+let exIndex = 0, exPhase = 'answering', fillSlots = {}, activeSlot = null;
 const SCREENS = {1:'s1',2:'s2',3:'s3',4:'s4',5:'s5',6:'s6'};
 
+// ---- MISSION DATA (dashboard content) ----
 const MISSIONS = {
   interview: {
     label: 'JOB INTERVIEW MISSION',
     focusIcon: '🎙️', focusTitle: 'Speaking Confidence', focusDesc: 'Introduce yourself clearly and confidently',
     e1: '🔵 Speaking: Tell Me About Yourself', e2: '📝 Vocabulary: Interview Words', e3: '🔒 Listening: Understand the Question',
-    exTitle: 'How would you answer this interview question?',
-    promptIcon: '💼', promptLabel: 'Interviewer asks:', promptQ: '"Tell me about yourself."',
-    words: ['I','am','currently','working','as','a','manager','where','I','lead','a','team'],
-    stat: '🎙️ 3 speaking', tIcon: '🤝', tTitle: 'Meetings & Presentations', tDesc: 'Speak confidently in workplace meetings'
+    stat: '🎙️ 4 exercises', tIcon: '🤝', tTitle: 'Meetings & Presentations', tDesc: 'Speak confidently in workplace meetings'
   },
   workplace: {
     label: 'WORKPLACE CONVERSATION MISSION',
     focusIcon: '🎙️', focusTitle: 'Meeting Confidence', focusDesc: 'Join and contribute to workplace discussions',
     e1: '🔵 Speaking: Join a Meeting', e2: '📝 Vocabulary: Meeting Phrases', e3: '🔒 Listening: Follow a Discussion',
-    exTitle: 'How would you respond in this meeting?',
-    promptIcon: '💬', promptLabel: 'Colleague asks:', promptQ: '"Can you walk us through the project?"',
-    words: ['I','would','like','to','walk','you','through','our','progress','on','this','project'],
-    stat: '🎙️ 3 speaking', tIcon: '📧', tTitle: 'Email & Reports', tDesc: 'Write clear professional communications'
+    stat: '🎙️ 4 exercises', tIcon: '📧', tTitle: 'Email & Reports', tDesc: 'Write clear professional communications'
   },
   corporate: {
     label: 'CORPORATE COMMUNICATION MISSION',
     focusIcon: '✍️', focusTitle: 'Writing Clarity', focusDesc: 'Draft clear professional messages',
     e1: '🔵 Writing: Draft a Status Update', e2: '📝 Vocabulary: Business Email Words', e3: '🔒 Reading: Understand a Memo',
-    exTitle: 'How would you write this message?',
-    promptIcon: '✉️', promptLabel: 'Manager asks:', promptQ: '"Send a project update to the team."',
-    words: ['I','am','writing','to','provide','a','brief','update','on','this','project'],
-    stat: '✍️ 3 writing', tIcon: '🎤', tTitle: 'Client Presentations', tDesc: 'Present ideas confidently to clients'
+    stat: '✍️ 4 exercises', tIcon: '🎤', tTitle: 'Client Presentations', tDesc: 'Present ideas confidently to clients'
   }
 };
 
+// ---- LESSON DATA (exercise content per mission) ----
+const LESSONS = {
+  interview: [
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best answer',
+      prompt:{icon:'💼',label:'Interviewer asks:',q:'"How would you introduce yourself?"'},
+      options:[
+        {text:"I was born in 1995 and grew up in a small town...",correct:false},
+        {text:"I'm a software developer with 5 years of experience in building web applications",correct:true},
+        {text:"I really need this job because my current company is terrible",correct:false},
+        {text:"Your company is so amazing, I've always dreamed of working here",correct:false}
+      ],
+      correctFeedback:"Leading with relevant experience is professional and concise.",
+      wrongFeedback:"Not quite! Try a more professional opening."
+    },
+    {
+      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you answer this interview question?',
+      prompt:{icon:'💼',label:'Interviewer asks:',q:'"Tell me about yourself."'},
+      correctWords:['I','am','currently','working','as','a','manager','where','I','lead','a','team'],
+      distractors:['they','often','very','because'],
+      correctFeedback:"Clear and professional — great answer!",
+      wrongFeedback:"Not quite — check the word order."
+    },
+    {
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'💼',label:'Practice saying:',q:''},
+      segments:[
+        {text:'I have '},
+        {blank:true,options:['5','many','2'],correct:0},
+        {text:' years of experience in '},
+        {blank:true,options:['project management','coding','things'],correct:0},
+        {text:'.'}
+      ],
+      correctFeedback:"Specific numbers and skills are more convincing!",
+      wrongFeedback:"Not quite — be specific and professional."
+    },
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best answer',
+      prompt:{icon:'💼',label:'Interviewer asks:',q:'"What is your greatest weakness?"'},
+      options:[
+        {text:"I'm a perfectionist who works too hard",correct:false},
+        {text:"I sometimes struggle with delegation, so I've been actively building team trust",correct:true},
+        {text:"I don't really have any weaknesses",correct:false},
+        {text:"I'm always late to meetings",correct:false}
+      ],
+      correctFeedback:"Honest and growth-oriented — exactly what interviewers want.",
+      wrongFeedback:"Not quite! Show self-awareness and growth."
+    }
+  ],
+  workplace: [
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best response',
+      prompt:{icon:'💬',label:'Team lead asks:',q:'"What\'s the status on your deliverables?"'},
+      options:[
+        {text:"We're on track — the API integration is 80% done and testing starts Thursday",correct:true},
+        {text:"Everything is going fine, no worries",correct:false},
+        {text:"I've been really busy with a lot of different things",correct:false},
+        {text:"I'll send you an email about it later",correct:false}
+      ],
+      correctFeedback:"Specific, proactive, and shows ownership!",
+      wrongFeedback:"Too vague — try being more specific about progress."
+    },
+    {
+      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you respond in this meeting?',
+      prompt:{icon:'💬',label:'Colleague asks:',q:'"Can you walk us through the project?"'},
+      correctWords:['I','would','like','to','walk','you','through','our','progress','on','this','project'],
+      distractors:['them','always','maybe','since'],
+      correctFeedback:"Professional and confident!",
+      wrongFeedback:"Not quite — check the word order."
+    },
+    {
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'💬',label:'Practice saying:',q:''},
+      segments:[
+        {text:"I'll "},
+        {blank:true,options:['send','give','do'],correct:0},
+        {text:' the report by '},
+        {blank:true,options:['end of day','sometime','whenever'],correct:0},
+        {text:' tomorrow.'}
+      ],
+      correctFeedback:"Clear and specific — great professional communication!",
+      wrongFeedback:"Not quite — be more specific and direct."
+    },
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best response',
+      prompt:{icon:'💬',label:'In a meeting:',q:'"I think we should skip testing to save time."'},
+      options:[
+        {text:"That's a terrible idea and it won't work",correct:false},
+        {text:"I see your point, but testing could save us time fixing bugs later — what if we do a focused round?",correct:true},
+        {text:"Whatever you think is best, I'll go along with it",correct:false},
+        {text:"The data doesn't support that approach at all",correct:false}
+      ],
+      correctFeedback:"Respectful, constructive, and solution-oriented!",
+      wrongFeedback:"Not quite — aim for respectful and constructive."
+    }
+  ],
+  corporate: [
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best option',
+      prompt:{icon:'✉️',label:'Writing to your team:',q:'"Send a project update email."'},
+      options:[
+        {text:"Hey team! Just wanted to give you a quick update 👋",correct:false},
+        {text:"I'm writing to provide an update on the Q2 project deliverables",correct:true},
+        {text:"As per my last email which no one responded to...",correct:false},
+        {text:"Hope this email finds you well! I wanted to touch base about the project",correct:false}
+      ],
+      correctFeedback:"Direct, professional, and clearly states the purpose!",
+      wrongFeedback:"Not quite — aim for direct and professional."
+    },
+    {
+      type:'assembly', label:'SENTENCE ASSEMBLY', title:'How would you write this message?',
+      prompt:{icon:'✉️',label:'Manager asks:',q:'"Send a project update to the team."'},
+      correctWords:['I','am','writing','to','provide','a','brief','update','on','this','project'],
+      distractors:['hereby','regarding','per','therefore'],
+      correctFeedback:"Clear and professional!",
+      wrongFeedback:"Not quite — check the word order."
+    },
+    {
+      type:'fillblank', label:'FILL IN THE BLANK', title:'Complete the sentence',
+      prompt:{icon:'✉️',label:'Practice writing:',q:''},
+      segments:[
+        {text:'Please find '},
+        {blank:true,options:['attached','enclosed','herewith'],correct:0},
+        {text:' the quarterly report for your '},
+        {blank:true,options:['review','perusal','information'],correct:0},
+        {text:'.'}
+      ],
+      correctFeedback:"Perfect professional email language!",
+      wrongFeedback:"Not quite — use standard business email phrasing."
+    },
+    {
+      type:'mc', label:'MULTIPLE CHOICE', title:'Choose the best option',
+      prompt:{icon:'✉️',label:'Email closing:',q:'"End a formal client email."'},
+      options:[
+        {text:"Please don't hesitate to reach out if you have any questions. Best regards, [Name]",correct:true},
+        {text:"Thanks! Talk soon 😊",correct:false},
+        {text:"Sent from my iPhone",correct:false},
+        {text:"I look forward to your earliest response at the soonest possible convenience",correct:false}
+      ],
+      correctFeedback:"Professional, warm, and appropriately formal!",
+      wrongFeedback:"Not quite — keep it professional but approachable."
+    }
+  ]
+};
+
+// ---- EXERCISE RENDERERS ----
+function renderMC(ex) {
+  var h = '<div class="mc-opts">';
+  ex.options.forEach(function(opt, i) {
+    h += '<div class="mc-opt" data-idx="' + i + '">' + opt.text + '</div>';
+  });
+  h += '</div>';
+  return h;
+}
+
+function attachMCListeners() {
+  var opts = document.querySelectorAll('.mc-opt');
+  opts.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      if (exPhase !== 'answering') return;
+      opts.forEach(function(o) { o.classList.remove('sel'); });
+      this.classList.add('sel');
+      document.getElementById('chkbtn').classList.remove('off');
+    });
+  });
+}
+
+function shuffleArray(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function renderAssembly(ex) {
+  var allWords = ex.correctWords.concat(ex.distractors);
+  var shuffled = shuffleArray(allWords);
+  var h = '<div class="aarea-int" id="asmAnswer"><span class="asm-placeholder">Tap words to build your answer</span></div>';
+  h += '<div class="wbank-int" id="asmBank">';
+  shuffled.forEach(function(w, i) {
+    h += '<span class="wc-int" data-bidx="' + i + '" data-word="' + w + '">' + w + '</span>';
+  });
+  h += '</div>';
+  return h;
+}
+
+function attachAssemblyListeners() {
+  var bank = document.getElementById('asmBank');
+  var answer = document.getElementById('asmAnswer');
+  bank.addEventListener('click', function(e) {
+    var wc = e.target.closest('.wc-int');
+    if (!wc || wc.classList.contains('placed') || exPhase !== 'answering') return;
+    wc.classList.add('placed');
+    var clone = document.createElement('span');
+    clone.className = 'wc-int in-answer';
+    clone.textContent = wc.dataset.word;
+    clone.dataset.bankRef = wc.dataset.bidx;
+    answer.appendChild(clone);
+    var ph = answer.querySelector('.asm-placeholder');
+    if (ph) ph.style.display = 'none';
+    answer.classList.add('has-words');
+    document.getElementById('chkbtn').classList.remove('off');
+  });
+  answer.addEventListener('click', function(e) {
+    var wc = e.target.closest('.wc-int');
+    if (!wc || exPhase !== 'answering') return;
+    var bankRef = wc.dataset.bankRef;
+    var bankWord = bank.querySelector('[data-bidx="' + bankRef + '"]');
+    if (bankWord) bankWord.classList.remove('placed');
+    wc.remove();
+    if (!answer.querySelector('.wc-int')) {
+      answer.classList.remove('has-words');
+      var ph = answer.querySelector('.asm-placeholder');
+      if (ph) ph.style.display = '';
+      document.getElementById('chkbtn').classList.add('off');
+    }
+  });
+}
+
+function renderFillBlank(ex) {
+  var h = '<div class="fb-sent">';
+  var slotCount = 0;
+  ex.segments.forEach(function(seg, i) {
+    if (seg.blank) {
+      h += '<span class="fb-slot" data-slot="' + i + '" data-snum="' + slotCount + '">___</span>';
+      slotCount++;
+    } else {
+      h += '<span class="fb-word">' + seg.text + '</span>';
+    }
+  });
+  h += '</div>';
+  h += '<div class="fb-choices" id="fbChoices" style="display:none"></div>';
+  return h;
+}
+
+function attachFillBlankListeners(ex) {
+  var slots = document.querySelectorAll('.fb-slot');
+  var choicesDiv = document.getElementById('fbChoices');
+  slots.forEach(function(slot) {
+    slot.addEventListener('click', function() {
+      if (exPhase !== 'answering') return;
+      var slotIdx = parseInt(this.dataset.slot);
+      activeSlot = slotIdx;
+      slots.forEach(function(s) { s.classList.remove('active'); });
+      this.classList.add('active');
+      var seg = ex.segments[slotIdx];
+      choicesDiv.style.display = 'flex';
+      choicesDiv.innerHTML = '';
+      seg.options.forEach(function(opt, ci) {
+        var chip = document.createElement('span');
+        chip.className = 'fb-choice';
+        chip.textContent = opt;
+        chip.dataset.choiceIdx = ci;
+        if (fillSlots[slotIdx] === ci) chip.classList.add('sel');
+        chip.addEventListener('click', function() {
+          fillSlots[slotIdx] = ci;
+          slot.textContent = opt;
+          slot.classList.add('filled');
+          slot.classList.remove('active');
+          choicesDiv.querySelectorAll('.fb-choice').forEach(function(c) { c.classList.remove('sel'); });
+          this.classList.add('sel');
+          var blankCount = ex.segments.filter(function(s) { return s.blank; }).length;
+          if (Object.keys(fillSlots).length >= blankCount) {
+            document.getElementById('chkbtn').classList.remove('off');
+          }
+          choicesDiv.style.display = 'none';
+          var nextSlot = document.querySelector('.fb-slot:not(.filled)');
+          if (nextSlot) {
+            setTimeout(function() { nextSlot.click(); }, 200);
+          }
+        });
+        choicesDiv.appendChild(chip);
+      });
+    });
+  });
+  setTimeout(function() { if (slots[0]) slots[0].click(); }, 150);
+}
+
+// ---- EXERCISE ORCHESTRATOR ----
+function renderExercise(index) {
+  var lesson = LESSONS[s2sel] || LESSONS.interview;
+  var ex = lesson[index];
+  exPhase = 'answering';
+  fillSlots = {};
+  activeSlot = null;
+
+  var pct = (index / 4) * 100;
+  document.getElementById('exPfill').style.width = pct + '%';
+
+  var container = document.getElementById('exContainer');
+  var h = '';
+  h += '<div class="etlbl">' + ex.label + '</div>';
+  h += '<div class="ettl">' + ex.title + '</div>';
+  if (ex.prompt && ex.prompt.q) {
+    h += '<div class="icard"><div class="icl">' + ex.prompt.icon + ' <em>' + ex.prompt.label + '</em></div><div class="icq">' + ex.prompt.q + '</div></div>';
+  }
+  switch (ex.type) {
+    case 'mc': h += renderMC(ex); break;
+    case 'assembly': h += renderAssembly(ex); break;
+    case 'fillblank': h += renderFillBlank(ex); break;
+  }
+  container.innerHTML = h;
+
+  var btn = document.getElementById('chkbtn');
+  btn.textContent = 'CHECK';
+  btn.classList.add('off');
+  btn.style.background = '';
+  btn.style.borderBottomColor = '';
+
+  document.getElementById('fb').classList.remove('show');
+  document.getElementById('fb').className = 'fbar';
+
+  switch (ex.type) {
+    case 'mc': attachMCListeners(); break;
+    case 'assembly': attachAssemblyListeners(); break;
+    case 'fillblank': attachFillBlankListeners(ex); break;
+  }
+}
+
+function startLesson() {
+  exIndex = 0;
+  exPhase = 'answering';
+  fillSlots = {};
+  activeSlot = null;
+  renderExercise(0);
+}
+
+// ---- VALIDATION ----
+function validateMC(ex) {
+  var selected = document.querySelector('.mc-opt.sel');
+  if (!selected) return false;
+  return ex.options[parseInt(selected.dataset.idx)].correct;
+}
+
+function validateAssembly(ex) {
+  var answer = document.getElementById('asmAnswer');
+  var placed = [];
+  answer.querySelectorAll('.wc-int').forEach(function(c) { placed.push(c.textContent); });
+  if (placed.length !== ex.correctWords.length) return false;
+  for (var i = 0; i < placed.length; i++) {
+    if (placed[i] !== ex.correctWords[i]) return false;
+  }
+  return true;
+}
+
+function validateFillBlank(ex) {
+  for (var i = 0; i < ex.segments.length; i++) {
+    if (ex.segments[i].blank) {
+      if (fillSlots[i] !== ex.segments[i].correct) return false;
+    }
+  }
+  return true;
+}
+
+// ---- FEEDBACK ----
+function markCorrectState(ex) {
+  switch (ex.type) {
+    case 'mc':
+      document.querySelectorAll('.mc-opt').forEach(function(opt) {
+        if (ex.options[parseInt(opt.dataset.idx)].correct) opt.classList.add('correct');
+        else opt.classList.add('dim');
+      });
+      break;
+    case 'assembly':
+      document.getElementById('asmAnswer').classList.add('correct');
+      break;
+    case 'fillblank':
+      document.querySelectorAll('.fb-slot').forEach(function(s) { s.classList.add('correct'); });
+      break;
+  }
+}
+
+function resetExerciseSelection(ex) {
+  switch (ex.type) {
+    case 'mc':
+      var wrongOpt = document.querySelector('.mc-opt.sel');
+      if (wrongOpt) {
+        wrongOpt.classList.add('wrong');
+        setTimeout(function() { wrongOpt.classList.remove('sel','wrong'); }, 600);
+      }
+      break;
+    case 'assembly':
+      var asm = document.getElementById('asmAnswer');
+      asm.classList.add('wrong');
+      setTimeout(function() { asm.classList.remove('wrong'); }, 600);
+      break;
+    case 'fillblank':
+      ex.segments.forEach(function(seg, i) {
+        if (seg.blank && fillSlots[i] !== seg.correct) {
+          var slot = document.querySelector('.fb-slot[data-slot="' + i + '"]');
+          if (slot) {
+            slot.classList.add('wrong');
+            setTimeout(function() {
+              slot.classList.remove('wrong','filled');
+              slot.textContent = '___';
+              delete fillSlots[i];
+            }, 600);
+          }
+        }
+      });
+      break;
+  }
+}
+
+function showFeedback(correct, ex) {
+  var fb = document.getElementById('fb');
+  var btn = document.getElementById('chkbtn');
+  if (correct) {
+    fb.className = 'fbar';
+    fb.innerHTML = '✓ ' + ex.correctFeedback + '<span style="float:right;opacity:.8">TAP TO CONTINUE →</span>';
+    fb.classList.add('show');
+    exPhase = 'continue';
+    btn.textContent = 'CONTINUE';
+    btn.classList.remove('off');
+    btn.style.background = '#58CC02';
+    btn.style.borderBottomColor = '#46A302';
+    markCorrectState(ex);
+  } else {
+    fb.className = 'fbar wrong';
+    fb.textContent = '✗ ' + ex.wrongFeedback;
+    fb.classList.add('show');
+    exPhase = 'answering';
+    btn.classList.add('off');
+    resetExerciseSelection(ex);
+    setTimeout(function() { fb.classList.remove('show'); }, 1500);
+  }
+}
+
+// ---- CHECK / CONTINUE HANDLER ----
+function handleCheck() {
+  if (busy) return;
+  var btn = document.getElementById('chkbtn');
+  if (btn.classList.contains('off')) return;
+  var lesson = LESSONS[s2sel] || LESSONS.interview;
+  var ex = lesson[exIndex];
+
+  if (exPhase === 'answering') {
+    var isCorrect = false;
+    switch (ex.type) {
+      case 'mc': isCorrect = validateMC(ex); break;
+      case 'assembly': isCorrect = validateAssembly(ex); break;
+      case 'fillblank': isCorrect = validateFillBlank(ex); break;
+    }
+    showFeedback(isCorrect, ex);
+  } else if (exPhase === 'continue') {
+    document.getElementById('fb').classList.remove('show');
+    if (exIndex < 3) {
+      exIndex++;
+      renderExercise(exIndex);
+    } else {
+      document.getElementById('exPfill').style.width = '100%';
+      busy = true;
+      setTimeout(function() { busy = false; nav(6); }, 400);
+    }
+  }
+}
+
+function fbClick() {
+  if (exPhase === 'continue') handleCheck();
+}
+
+function exitExercise() {
+  exIndex = 0;
+  exPhase = 'answering';
+  fillSlots = {};
+  activeSlot = null;
+  nav(4);
+}
+
+// ---- DASHBOARD UPDATE ----
 function updScreens() {
-  const m = MISSIONS[s2sel] || MISSIONS.interview;
-  // S4
+  var m = MISSIONS[s2sel] || MISSIONS.interview;
   document.getElementById('d4label').textContent = m.label;
   document.getElementById('d4days').textContent = days + ' DAYS';
   document.getElementById('d4fIcon').textContent = m.focusIcon;
@@ -370,47 +871,68 @@ function updScreens() {
   document.getElementById('d4e1').textContent = m.e1;
   document.getElementById('d4e2').textContent = m.e2;
   document.getElementById('d4e3').textContent = m.e3;
-  // S5
-  document.getElementById('d5title').textContent = m.exTitle;
-  document.getElementById('d5prompt').innerHTML = m.promptIcon + ' <em>' + m.promptLabel + '</em>';
-  document.getElementById('d5question').textContent = m.promptQ;
-  const aa = document.getElementById('aa');
-  const wb = document.querySelector('.wbank');
-  aa.innerHTML = m.words.map(w => '<span class="wc">' + w + '</span>').join('');
-  wb.innerHTML = m.words.map(w => '<span class="wc">' + w + '</span>').join('');
-  // Reset assembly styles
-  aa.style.background = '';
-  aa.style.borderColor = '';
-  aa.style.borderStyle = '';
-  // S6
   document.getElementById('d6stat').textContent = m.stat;
   document.getElementById('d6tIcon').textContent = m.tIcon;
   document.getElementById('d6tTitle').textContent = m.tTitle;
   document.getElementById('d6tDesc').textContent = m.tDesc;
+  updateDashForDay();
 }
 
+// ---- DAY TOGGLE ----
+function toggleDay(d) {
+  dashDay = d;
+  document.querySelectorAll('.dt-opt').forEach(function(o) {
+    o.classList.toggle('dt-active', parseInt(o.dataset.day) === dashDay);
+  });
+  updateDashForDay();
+}
+
+function updateDashForDay() {
+  var pf = document.getElementById('d4pf');
+  var pc = document.getElementById('d4pc');
+  var mot = document.getElementById('d4mot');
+  if (dashDay === 7) {
+    pf.style.width = '33%';
+    pc.textContent = '33% mission-ready';
+    mot.textContent = "Great progress! You're ahead of schedule";
+    document.getElementById('d4dot1').style.background = '#58CC02';
+    document.getElementById('d4dot2').style.background = '#1CB0F6';
+    document.getElementById('d4e2').style.color = '#1C1C1C';
+    document.getElementById('d4e2').style.fontWeight = '600';
+    document.getElementById('d6title').textContent = 'Day 7 Complete!';
+    document.getElementById('d6sub').textContent = "You're 33% mission-ready.";
+    document.getElementById('d6pct').textContent = '33%';
+  } else {
+    pf.style.width = '4%';
+    pc.textContent = '4% mission-ready';
+    mot.textContent = "You're on track for your deadline";
+    document.getElementById('d4dot1').style.background = '#1CB0F6';
+    document.getElementById('d4dot2').style.background = '#AFAFAF';
+    document.getElementById('d4e2').style.color = '#777';
+    document.getElementById('d4e2').style.fontWeight = '400';
+    document.getElementById('d6title').textContent = 'Day 1 Complete!';
+    document.getElementById('d6sub').textContent = "You're 4% mission-ready.";
+    document.getElementById('d6pct').textContent = '4%';
+  }
+}
+
+// ---- NAVIGATION ----
 function nav(to) {
   if (busy || to === cur) return;
   busy = true;
-  const forward = to > cur;
-  const oldEl = document.getElementById(SCREENS[cur]);
-  const newEl = document.getElementById(SCREENS[to]);
+  var forward = to > cur;
+  var oldEl = document.getElementById(SCREENS[cur]);
+  var newEl = document.getElementById(SCREENS[to]);
   if (!oldEl || !newEl) { busy = false; return; }
 
-  // Position new screen off-screen
   newEl.classList.remove('on','slide-out-left','slide-out-right','slide-in-left','slide-in-right','animating');
   oldEl.classList.remove('on','slide-out-left','slide-out-right','slide-in-left','slide-in-right','animating');
 
-  if (forward) {
-    newEl.classList.add('slide-in-right');
-  } else {
-    newEl.classList.add('slide-in-left');
-  }
+  if (forward) { newEl.classList.add('slide-in-right'); }
+  else { newEl.classList.add('slide-in-left'); }
 
-  // Force reflow
   void newEl.offsetWidth;
 
-  // Animate both
   newEl.classList.add('animating');
   oldEl.classList.add('animating');
 
@@ -428,31 +950,30 @@ function nav(to) {
 
   cur = to;
 
-  // Update dynamic content when entering screens 4-6
   if (to >= 4) updScreens();
-
-  // Screen 6: animate ring
+  if (to === 5) startLesson();
   if (to === 6) {
-    setTimeout(() => document.getElementById('rf').classList.add('anim'), 100);
+    var offset = dashDay === 7 ? 151.15 : 217.15;
+    document.getElementById('rf').style.strokeDashoffset = '226.2';
+    setTimeout(function() { document.getElementById('rf').style.strokeDashoffset = offset; }, 100);
   }
 
-  setTimeout(() => {
-    // Clean up old screen
+  setTimeout(function() {
     oldEl.classList.remove('animating','slide-out-left','slide-out-right');
     newEl.classList.remove('animating');
     busy = false;
   }, 280);
 }
 
-// Card selection
+// ---- CARD SELECTION ----
 document.addEventListener('click', function(e) {
-  const c = e.target.closest('.card');
+  var c = e.target.closest('.card');
   if (!c || busy) return;
-  const g = c.dataset.g;
-  if (!g || g === 'g1locked') return; // Screen 1 locked
-  const container = document.getElementById(g);
+  var g = c.dataset.g;
+  if (!g || g === 'g1locked') return;
+  var container = document.getElementById(g);
   if (!container) return;
-  container.querySelectorAll('.card').forEach(x => x.classList.remove('sel'));
+  container.querySelectorAll('.card').forEach(function(x) { x.classList.remove('sel'); });
   c.classList.add('sel');
   if (g === 'g2') {
     s2sel = c.dataset.v;
@@ -462,17 +983,17 @@ document.addEventListener('click', function(e) {
 
 function s2go() { if (s2sel) nav(3); }
 
-// Date
-const MO = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+// ---- DATE ----
+var MO = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
 function updDate() {
-  const d = new Date(); d.setDate(d.getDate() + days);
+  var d = new Date(); d.setDate(d.getDate() + days);
   document.getElementById('dm').textContent = MO[d.getMonth()];
   document.getElementById('dd').textContent = d.getDate();
   document.getElementById('dy').textContent = d.getFullYear();
   document.getElementById('dfl').textContent = days + ' days from today';
   document.getElementById('dl').classList.toggle('dis', days <= 7);
   document.getElementById('dr').classList.toggle('dis', days >= 90);
-  const pc = document.getElementById('pc');
+  var pc = document.getElementById('pc');
   if (days <= 13) { pc.textContent = "Ambitious! You'll need ~30 min/day"; pc.style.color = '#FF9600'; }
   else if (days <= 30) { pc.textContent = days + " days · ~15 min/day · Your mission is achievable ✓"; pc.style.color = '#1C1C1C'; }
   else if (days <= 60) { pc.textContent = "Comfortable pace. ~10 min/day"; pc.style.color = '#1CB0F6'; }
@@ -480,29 +1001,13 @@ function updDate() {
 }
 function chgDate(d) {
   if (busy) return;
-  const n = days + d;
+  var n = days + d;
   if (n < 7 || n > 90) return;
   days = n;
   updDate();
 }
 
-// Check
-function doCheck() {
-  if (busy) return;
-  busy = true;
-  const aa = document.getElementById('aa');
-  aa.style.background = '#F0FAE5';
-  aa.style.borderColor = '#58CC02';
-  aa.style.borderStyle = 'solid';
-  setTimeout(() => document.getElementById('fb').classList.add('show'), 200);
-  ftm = setTimeout(() => {
-    document.getElementById('fb').classList.remove('show');
-    busy = false;
-    nav(6);
-  }, 1700);
-}
-
-// Demo complete
+// ---- DEMO COMPLETE ----
 function showEnd() {
   if (busy) return;
   done = true;
@@ -512,40 +1017,30 @@ function showEnd() {
 function restart() {
   done = false;
   document.getElementById('ov').classList.remove('show');
-  // Reset all screens
-  Object.values(SCREENS).forEach(id => {
-    const el = document.getElementById(id);
+  Object.values(SCREENS).forEach(function(id) {
+    var el = document.getElementById(id);
     el.classList.remove('on','slide-out-left','slide-out-right','slide-in-left','slide-in-right','animating');
   });
-  cur = 1;
-  s2sel = null;
-  days = 21;
-  // Reset S1
-  document.querySelectorAll('#g1 .card').forEach(c => c.classList.remove('sel'));
+  cur = 1; s2sel = null; days = 21; dashDay = 1;
+  exIndex = 0; exPhase = 'answering'; fillSlots = {}; activeSlot = null;
+  document.querySelectorAll('#g1 .card').forEach(function(c) { c.classList.remove('sel'); });
   document.querySelector('#g1 .card').classList.add('sel');
-  // Reset S2
-  document.querySelectorAll('#g2 .card').forEach(c => c.classList.remove('sel'));
+  document.querySelectorAll('#g2 .card').forEach(function(c) { c.classList.remove('sel'); });
   document.getElementById('s2btn').classList.add('off');
-  // Reset S3
   updDate();
-  // Reset S5
-  const aa = document.getElementById('aa');
-  aa.style.background = '';
-  aa.style.borderColor = '';
-  aa.style.borderStyle = '';
+  document.querySelectorAll('.dt-opt').forEach(function(o) {
+    o.classList.toggle('dt-active', parseInt(o.dataset.day) === 1);
+  });
   document.getElementById('fb').classList.remove('show');
-  if (ftm) clearTimeout(ftm);
-  // Reset S6
-  document.getElementById('rf').classList.remove('anim');
-  // Show S1
+  document.getElementById('fb').className = 'fbar';
+  document.getElementById('rf').style.strokeDashoffset = '226.2';
   document.getElementById('s1').classList.add('on');
   busy = false;
 }
 
-// Overlay click
 document.getElementById('ov').addEventListener('click', restart);
 
-// Keyboard
+// ---- KEYBOARD ----
 document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowRight' || e.key === ' ') {
     e.preventDefault();
@@ -554,28 +1049,29 @@ document.addEventListener('keydown', function(e) {
     else if (cur === 2) s2go();
     else if (cur === 3) nav(4);
     else if (cur === 4) nav(5);
-    else if (cur === 5) doCheck();
+    else if (cur === 5) handleCheck();
     else if (cur === 6) showEnd();
   }
   if (e.key === 'ArrowLeft') {
     e.preventDefault();
     if (done) { restart(); return; }
+    if (cur === 5) { exitExercise(); return; }
     if (cur > 1) nav(cur - 1);
   }
 });
 
-// Scale
+// ---- SCALE ----
 function scl() {
-  const s = Math.min(1, (window.innerHeight * 0.95) / 844);
+  var s = Math.min(1, (window.innerHeight * 0.95) / 844);
   document.getElementById('phone').style.transform = 'scale(' + s + ')';
 }
 window.addEventListener('resize', scl);
 
-// Confetti
+// ---- CONFETTI ----
 (function() {
-  const c = document.getElementById('confC'), cols = ['#58CC02','#FF9600','#1CB0F6','#FF4B4B'];
-  for (let i = 0; i < 25; i++) {
-    const p = document.createElement('div');
+  var c = document.getElementById('confC'), cols = ['#58CC02','#FF9600','#1CB0F6','#FF4B4B'];
+  for (var i = 0; i < 25; i++) {
+    var p = document.createElement('div');
     p.className = 'cp';
     p.style.left = Math.random() * 100 + '%';
     p.style.background = cols[Math.floor(Math.random() * 4)];
