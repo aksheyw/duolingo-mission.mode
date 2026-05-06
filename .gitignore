@@ -18,3 +18,6 @@ NEXT_ROUND_HANDOFF.md
 # Anonymization — explicit branded artifacts removed from public repo
 whatsapp_mockup.html
 prototype_screenshots/whatsapp_mockup.png
+
+# Project memory + wiki — local-only knowledge base, never publish
+.claude/
