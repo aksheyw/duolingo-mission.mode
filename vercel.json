@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/mission_mode_prototype_embed.html", "permanent": false }
+  ]
+}
